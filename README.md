@@ -29,6 +29,8 @@
 - 根本に立ち返って自分が何者なのか知りたくなった時
 
 ## 設計書
+- [テーブル提議書](https://docs.google.com/spreadsheets/d/1lV7RZEoHWc0en_pfhtAjPX4GR6nu8ZenkkhEHa87vY8/edit#gid=1689603443)
+- [ER図](https://drive.google.com/file/d/1briRg2qgSBxRGGYwkV_scQlT6wLEAXZQ/view?usp=sharing)
 
 ## 開発環境
 - OS：Linux(CentOS)
