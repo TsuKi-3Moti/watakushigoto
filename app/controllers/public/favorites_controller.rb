@@ -3,10 +3,10 @@ class Public::FavoritesController < ApplicationController
   def create
   end
 
-  def destroy
+  def update
   end
 
-  def update
+  def destroy
   end
 
   def favorited_answers
