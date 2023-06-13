@@ -28,7 +28,7 @@
           <td><%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-success" %></td>
           <td>
             <%= link_to "Destroy", question_path(@question), method: :delete,
-            data: { confirm: "question『#{@question.title}』を削除しますか？ ※このクエスチョンについたアンサーも一緒に削除されます。" },
+            data: { confirm: "”#{@question.title}”を削除しますか？\n ※このクエスチョンについたアンサーも一緒に削除されます。" },
             class: "btn btn-sm btn-danger" %>
           </td>
           <% end %>
