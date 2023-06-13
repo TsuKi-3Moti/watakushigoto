@@ -11,6 +11,12 @@ module Watakushigoto
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # デフォルト言語を英語から日本語に設定
+    config.i18n.default_locale = :ja
+    
+    # config/locales/以下に設定した翻訳ファイルを全て読み込めるようにする
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
