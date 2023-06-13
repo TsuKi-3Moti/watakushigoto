@@ -15,19 +15,19 @@
         <%= render "public/shared/error_messages", resource: resource %>
       <div class="row justify-content-center">
         <div class="field form-group">
-          <%= f.label :name, "ニックネーム" %><br />
+          <%= f.label :name %><br />
           <%= f.text_field :name, autofocus: true, autocomplete: "name",
           placeholder: "👤ニックネーム", required: true %>
         </div>
 
         <div class="field form-group">
-          <%= f.label :email, "メールアドレス" %><br />
+          <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email",
           placeholder: "✉️メールアドレス", required: true %>
         </div>
 
         <div class="field form-group">
-          <%= f.label :password, "パスワード" %>
+          <%= f.label :password %>
           <% if @minimum_password_length %>
           <p class="d-inline">(<%= @minimum_password_length %> 文字以上)</p>
           <% end %><br />
@@ -36,9 +36,9 @@
         </div>
 
         <div class="field form-group">
-          <%= f.label :password_confirmation, "パスワード再入力" %><br />
+          <%= f.label :password_confirmation %><br />
           <%= f.password_field :password_confirmation, autocomplete: "new-password",
-          placeholder: "🔒パスワード", required: true %>
+          placeholder: "🔒確認用パスワード", required: true %>
         </div>
 
         <div class="actions form-group">
