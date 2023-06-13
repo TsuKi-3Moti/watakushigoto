@@ -22,6 +22,7 @@ class Public::QuestionsController < ApplicationController
     @questions = Question.all
     @question = Question.new
     @user = @question.user
+    @latest_answer = Answer.last
   end
 
   def update
