@@ -9,7 +9,7 @@ class Public::RelationshipsController < ApplicationController
   def destroy
   end
 
-  def created_tags
+  def tags
   end
 
 end
