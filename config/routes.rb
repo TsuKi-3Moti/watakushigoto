@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
     resources :answers, only: [] do
       resource :favorites, only: [:create, :destroy]
-      get      :tags
+      get "tags" => "relationships#tags", as: "tags", on: :collection
     end
 
     resources :relationships, only: [:create, :update, :destroy]
