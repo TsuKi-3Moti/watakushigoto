@@ -1,5 +1,7 @@
 class Public::QuestionsController < ApplicationController
 
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
@@ -47,6 +49,13 @@ class Public::QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title)
+  end
+
+  def is_matching_login_user
+    @question = Question.find(params[:id])
+    unless @question.user.id == current_user.id
+      redirect_to questions_path
+    end
   end
 
 end
