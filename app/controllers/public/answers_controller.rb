@@ -6,7 +6,7 @@ class Public::AnswersController < ApplicationController
     @answer.question_id = @question.id
     @answer.save
     @new_answer = Answer.new
-    redirect_to request.referer
+    # redirect_to request.referer
   end
 
   def edit
@@ -26,7 +26,7 @@ class Public::AnswersController < ApplicationController
   def destroy
     @question = Question.find(params[:question_id])
     Answer.find(params[:id]).destroy
-    redirect_to request.referer
+    # redirect_to request.referer
   end
 
   private

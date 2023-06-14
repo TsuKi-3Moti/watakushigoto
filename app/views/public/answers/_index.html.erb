@@ -5,8 +5,8 @@
     <td><%= i + 1 %></td>
     <td><%= safe_join(answer.opinion.split("\n"),tag(:br)) %></td>
     <td>
-      <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-success" %>
-      <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete,
+      <%= link_to "Edit", edit_question_answer_path(answer.question, answer), remote: true, class: "btn btn-success" %>
+      <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
       data: { confirm: "”#{answer.opinion}”を削除しますか？" }, class: "btn btn-danger" %>
     </td>
     <td><%= answer.created_at %></td>

@@ -16,7 +16,7 @@
         <% latest_answer = question.answers.last %>
 
         <% if latest_answer %>
-          <td class="w-auto"><%= truncate(latest_answer.opinion, length: 50) %></td>
+          <td><%= truncate(latest_answer.opinion, length: 50) %></td>
         <% else %>
           <td>まだアンサーがありません</td>
         <% end %>
