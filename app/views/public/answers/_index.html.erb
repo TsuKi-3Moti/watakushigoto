@@ -4,7 +4,8 @@
     <td><%= answer.opinion %></td>
     <td>
       <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-success" %>
-      <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, class: "btn btn-danger" %>
+      <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete,
+      data: { confirm: "”#{answer.opinion}”を削除しますか？" }, class: "btn btn-danger" %>
     </td>
   </tr>
   <% end %>
