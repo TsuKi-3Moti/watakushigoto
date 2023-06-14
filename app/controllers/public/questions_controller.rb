@@ -17,6 +17,7 @@ class Public::QuestionsController < ApplicationController
     @user = @question.user
     @new_question = Question.new
     @answer = Answer.new
+    
   end
 
   def index

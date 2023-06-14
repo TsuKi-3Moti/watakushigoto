@@ -1,6 +1,6 @@
 <div>
   <%= form_with model: [question, answer], local: true do |f| %>
     <%= f.text_area :opinion, class: "form-control" %>
-    <%= f.submit "送信" %>
+    <%= f.submit class: "btn btn-success" %>
   <% end %>
 </div>

@@ -1,12 +1,15 @@
-<table>
-  <% question.answers.each do |answer| %>
+<h3>Answer</h3>
+<table class="table">
+  <% question.answers.each_with_index do |answer, i| %>
   <tr>
-    <td><%= answer.opinion %></td>
+    <td><%= i + 1 %></td>
+    <td><%= safe_join(answer.opinion.split("\n"),tag(:br)) %></td>
     <td>
       <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-success" %>
       <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete,
       data: { confirm: "”#{answer.opinion}”を削除しますか？" }, class: "btn btn-danger" %>
     </td>
+    <td><%= answer.created_at %></td>
   </tr>
   <% end %>
 </table>
