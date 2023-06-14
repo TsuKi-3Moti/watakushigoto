@@ -1,1 +1,27 @@
 <h3>questions#index</h3>
+
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
+
+    <div class="col-md-3">
+      <h2>User info</h2>
+
+      <%#= render "users/info", user: current_user %>
+
+      <h2 class="mt-3">New question</h2>
+
+      <!--questionの投稿フォーム-->
+      <%= render "form", question: @question %>
+
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Question</h2>
+
+      <%= render "index", questions: @questions, answer: @latest_answer %>
+    </div>
+
+  </div>
+</div>

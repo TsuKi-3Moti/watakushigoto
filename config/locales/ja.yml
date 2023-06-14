@@ -16,6 +16,11 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         introduction: "自己紹介"
+  enums:
+    question:
+      status:
+        published: "公開"
+        draft: "下書き"
   date:
     abbr_day_names:
     - 日
