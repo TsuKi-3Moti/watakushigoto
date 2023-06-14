@@ -20,10 +20,8 @@ class Public::QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.includes(:answers, :user)
     @question = Question.new
-    @user = @question.user
-    @latest_answer = Answer.last
   end
 
   def update

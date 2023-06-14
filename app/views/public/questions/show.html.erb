@@ -36,9 +36,11 @@
       </table>
 
       <!--アンサーの一覧-->
-      <!--<div class="answer_<%#= @question.id %>"><%#= render "answers/index", question: @question %></div>-->
+      <div class="answer_<%= @question.id %>"><%= render "public/answers/index", question: @question %></div>
 
-      <!--<div id="answer_<%#= @question.id %>"><%#= render "answers/form", question: @question, answer: @answer %></div>-->
+    <% if @question.user == current_user %>
+      <div id="answer_<%= @question.id %>"><%= render "public/answers/form", question: @question, answer: @answer %></div>
+    <% end %>
 
     </div>
 

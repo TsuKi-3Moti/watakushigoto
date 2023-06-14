@@ -14,19 +14,20 @@
       <tr>
         <td><%= link_to question.title, question_path(question) %></td>
 
-        <% if answer %>
-        <td><%= question.answer.id.to_s %></td>
-        <td><%= question.answer.opinion %></td>
-        <td>アンサー数: <%= question.answers.count %></td>
+        <% latest_answer = question.answers.last %>
+        <% if latest_answer %>
+          <td><%= latest_answer.id %></td>
+          <td><%= latest_answer.opinion %></td>
+          <td>アンサー数: <%= question.answers.count %></td>
         <% else %>
-        <td></td>
-        <td>まだアンサーがありません</td>
-        <td></td>
+          <td></td>
+          <td>まだアンサーがありません</td>
+          <td></td>
         <% end %>
 
         <td>
           <%= link_to user_path(question.user.id) do %>
-            <%#= image_tag question.user.get_profile_image(80, 80) %>
+            <%= image_tag question.user.get_profile_image(80, 80) %><br />
             <%= question.user.name %>
           <% end %>
         </td>
