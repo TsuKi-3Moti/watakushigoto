@@ -2,9 +2,8 @@ class Public::QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
-    # @Question.user_id = current_user.id
     if @question.save
-      redirect_to question_path(@question.id), notice: "You have created Question successfully."
+      redirect_to question_path(@question.id)
     else
       @questions = Question.all
       render :index
@@ -26,15 +25,22 @@ class Public::QuestionsController < ApplicationController
   end
 
   def update
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      redirect_to question_path(@question.id)
+    else
+      render :edit
+    end
   end
 
   def edit
+    @question = Question.find(params[:id])
   end
 
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to questions_path#
+    redirect_to questions_path
   end
 
   private
