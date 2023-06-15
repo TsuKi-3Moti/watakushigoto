@@ -1,32 +1,29 @@
-<table class="table table-hover table-inverse">
+<table class="table">
   <thead>
     <tr>
       <th>タイトル</th>
       <th></th>
       <th>アンサー</th>
       <th></th>
-      <th></th>
-
     </tr>
   </thead>
   <tbody>
     <% questions.each do |question| %>
       <tr>
         <td><%= link_to question.title, question_path(question) %></td>
+        <td><%= question.answers.count %></td>
 
-        <% if answer %>
-        <td><%= question.answer.id.to_s %></td>
-        <td><%= question.answer.opinion %></td>
-        <td>アンサー数: <%= question.answers.count %></td>
+        <% latest_answer = question.answers.last %>
+
+        <% if latest_answer %>
+          <td><%= truncate(latest_answer.opinion, length: 50) %></td>
         <% else %>
-        <td></td>
-        <td>まだアンサーがありません</td>
-        <td></td>
+          <td>まだアンサーがありません</td>
         <% end %>
 
         <td>
           <%= link_to user_path(question.user.id) do %>
-            <%#= image_tag question.user.get_profile_image(80, 80) %>
+            <%= image_tag question.user.get_profile_image(80, 80), class: "rounded-circle" %><br />
             <%= question.user.name %>
           <% end %>
         </td>

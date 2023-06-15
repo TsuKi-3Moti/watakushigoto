@@ -17,13 +17,12 @@ class Public::QuestionsController < ApplicationController
     @user = @question.user
     @new_question = Question.new
     @answer = Answer.new
+    
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.includes(:answers, :user)
     @question = Question.new
-    @user = @question.user
-    @latest_answer = Answer.last
   end
 
   def update
