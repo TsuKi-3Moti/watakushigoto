@@ -1,0 +1,42 @@
+<h2>User info</h2>
+<div class="d-flex flex-column">
+  <!--プロフィール画像-->
+  <div class="text-center mb-2"><%= image_tag user.get_profile_image(150, 150), class: "rounded-circle" %></div>
+
+  <!--名前-->
+  <h5 class="lead font-weight-bold"><%= user.name %></h5>
+
+  <!--自己紹介-->
+  <span><%= user.introduction %></span>
+
+</div>
+
+<table class="table">
+
+  <tr>
+    <th>Questions</th>
+    <th><%= user.questions.count %></th>
+  </tr>
+
+  <!--いいねした投稿一覧-->
+  <% if current_user == user %>
+    <tr>
+      <th>favorites</th>
+      <th>
+        <%= link_to user.favorites.count, favorites_users_path %>
+      </th>
+    </tr>
+  <% end %>
+
+</table>
+
+<!--ユーザー情報編集画面へのリンク-->
+<% if current_user == user %>
+
+  <div class="row">
+    <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block rounded-pill" do %>
+      </i><i class="fa-solid fa-user-gear"></i>
+    <% end %>
+  </div>
+
+<% end %>
