@@ -1,3 +1,3 @@
-$(".answer_<%= @question.id %>").html("<%= j(render "public/answers/index", question: @question) %>");
+$(".<%= @question.id %>_answer_index").html("<%= j(render "public/answers/index", question: @question) %>");
 
-$("#answer_<%= @question.id %>").html("アンサー数: <%= j(@question.answers.count) %>");
+$("#<%= @question.id %>_answer_count").html("アンサー数: <%= j(@question.answers.count) %>");

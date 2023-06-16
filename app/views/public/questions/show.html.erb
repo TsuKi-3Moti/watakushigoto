@@ -20,7 +20,7 @@
   		  <tr>
           <td><%= link_to @question.title, question_path(@question) %></td>
 
-          <td id="answer_<%= @question.id %>">アンサー数: <%= @question.answers.count %></td>
+          <td id="<%= @question.id %>_answer_count">アンサー数: <%= @question.answers.count %></td>
 
           <% if @question.user == current_user %>
           <td><%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-success" %></td>
@@ -34,10 +34,10 @@
       </table>
 
       <!--アンサーの一覧-->
-      <div class="answer_<%= @question.id %>"><%= render "public/answers/index", question: @question %></div>
+      <div class="<%= @question.id %>_answer_index"><%= render "public/answers/index", question: @question %></div>
 
     <% if @question.user == current_user %>
-      <div id="answer_<%= @question.id %>"><%= render "public/answers/form", question: @question, answer: @answer %></div>
+      <div id="<%= @question.id %>_answer_form"><%= render "public/answers/form", question: @question, answer: @answer %></div>
     <% end %>
 
     </div>

@@ -1,0 +1,13 @@
+ja:
+  enums:
+    question:
+      status:
+        published: "公開"
+        draft: "下書き"
+  favorite:
+    design:
+      handshake: "<i class='fa-solid fa-handshake'></i>"
+      applause: "<i class='fa-solid fa-hands-clapping'></i>"
+      heart: "<i class='fa-solid fa-heart'></i>"
+      realize: "<i class='fa-solid fa-lightbulb'></i>"
+      crying: "<i class='fa-solid fa-face-sad-tear'></i>"

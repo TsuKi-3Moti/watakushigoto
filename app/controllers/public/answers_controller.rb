@@ -1,5 +1,5 @@
 class Public::AnswersController < ApplicationController
-
+  #[TODO] if文でcreateできなかったときの処理を書く
   def create
     @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)

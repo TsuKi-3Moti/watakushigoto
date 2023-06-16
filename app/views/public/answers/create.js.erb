@@ -1,5 +1,5 @@
-$(".answer_<%= @question.id %>").html("<%= j(render "public/answers/index", question: @question) %>");
-$("#answer_<%= @question.id %>").html("<%= j(render "public/answers/form", question: @question, answer: @answer) %>");
+$(".<%= @question.id %>_answer_index").html("<%= j(render "public/answers/index", question: @question) %>");
+$("#<%= @question.id %>_answer_form").html("<%= j(render "public/answers/form", question: @question, answer: @answer) %>");
 
-$("#answer_<%= @question.id %>").html("アンサー数: <%= j(@question.answers.count) %>");
+$("#<%= @question.id %>_answer_count").html("アンサー数: <%= j(@question.answers.count) %>");
 $(".answer_text_area").val("")
