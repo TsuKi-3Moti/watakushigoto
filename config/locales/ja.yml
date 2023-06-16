@@ -75,9 +75,9 @@ ja:
       about_x_months: "約%{count}ヶ月"
       about_x_years: "約%{count}年"
       almost_x_years: "%{count}年弱"
-      half_a_minute: "30秒前後"
-      less_than_x_seconds: "%{count}秒未満"
-      less_than_x_minutes: "%{count}分未満"
+      half_a_minute: "30秒"
+      less_than_x_seconds: "%{count}秒"
+      less_than_x_minutes: "%{count}分"
       over_x_years: "%{count}年以上"
       x_seconds: "%{count}秒"
       x_minutes: "%{count}分"
@@ -185,8 +185,8 @@ ja:
       words_connector: "、"
   time:
     am: "午前"
+    pm: "午後"
     formats:
       default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
-    pm: "午後"

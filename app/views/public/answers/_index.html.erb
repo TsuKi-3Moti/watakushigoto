@@ -6,11 +6,14 @@
     <td><%= safe_join(answer.opinion.split("\n"),tag(:br)) %></td>
     <td id="answer_<%= answer.id %>"><%= render "public/favorites/favorite-btn", answer: answer %></td>
     <td>
-      <%= link_to "Edit", edit_question_answer_path(answer.question, answer), remote: true, class: "btn btn-success" %>
+      <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-success" %>
       <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
       data: { confirm: "”#{answer.opinion}”を削除しますか？" }, class: "btn btn-danger" %>
     </td>
-    <td><%= l(answer.created_at, format: :long) %></td>
+    <td>
+      <%= l(answer.updated_at, format: :long) %><br />
+      <%= time_ago_in_words(answer.updated_at, format: :distance_in_words) %>
+    </td>
   </tr>
   <% end %>
 </table>

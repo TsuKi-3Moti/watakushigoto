@@ -1,6 +1,11 @@
-<div>
-  <%= form_with model: [question, answer], local: false do |f| %>
+<%= form_with model: [question, answer], local: false do |f| %>
+
+  <div class="form-group">
     <%= f.text_area :opinion, class: "form-control answer_text_area", rows: "10" %>
+  </div>
+
+  <div class="form-group">
     <%= f.submit class: "btn btn-success" %>
-  <% end %>
-</div>
+  </div>
+
+<% end %>
