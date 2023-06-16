@@ -16,11 +16,6 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         introduction: "自己紹介"
-  enums:
-    question:
-      status:
-        published: "公開"
-        draft: "下書き"
   date:
     abbr_day_names:
     - 日
@@ -97,7 +92,7 @@ ja:
       month: "月"
       year: "年"
   errors:
-    format: "%{attribute} %{message}"
+    format: "%{message}"
     messages:
       accepted: "を受諾してください"
       blank: "を入力してください"
@@ -120,7 +115,7 @@ ja:
       other_than: "は%{count}以外の値にしてください"
       present: "は入力しないでください"
       required: "を入力してください"
-      taken: "は既に存在しています"
+      taken: "こちらの%{attribute}は既に存在しています"
       too_long: "は%{count}文字以内で入力してください"
       too_short: "は%{count}文字以上で入力してください"
       wrong_length: "は%{count}文字で入力してください"

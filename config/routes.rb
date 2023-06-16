@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     end
 
     resources :answers, only: [] do
-      resource :favorites, only: [:create, :destroy]
+      post "favorites/:design" => "favorites#create", as: "favorites"
+      delete "favorites/:design" => "favorites#destroy", as: "favorites_destroy"
       get "tags" => "relationships#tags", as: "tags", on: :collection
     end
 
