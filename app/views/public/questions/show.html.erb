@@ -1,5 +1,7 @@
-<div class="container">
+<div class="container px-5 px-sm-0">
   <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
 
     <div class="col-md-3">
 
@@ -12,7 +14,7 @@
     </div>
 
     <div class="col-md-8 offset-md-1">
-  		<h2>My Question</h2>
+  		<h2>Question detail</h2>
 
   		<table class="table">
   		  <tr>
