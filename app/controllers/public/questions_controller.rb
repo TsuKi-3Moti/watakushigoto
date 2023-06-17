@@ -14,10 +14,9 @@ class Public::QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @user = @question.user
     @new_question = Question.new
     @answer = Answer.new
-    
+    @user = @question.user
   end
 
   def index
