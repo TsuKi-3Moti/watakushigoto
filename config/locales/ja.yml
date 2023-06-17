@@ -16,6 +16,7 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         introduction: "自己紹介"
+        profile_image: "プロフィール画像"
   date:
     abbr_day_names:
     - 日
