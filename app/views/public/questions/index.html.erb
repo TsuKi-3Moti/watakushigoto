@@ -1,0 +1,22 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
+
+    <div class="col-md-3">
+
+      <!--ユーザー情報-->
+      <%= render "public/users/info", user: current_user %>
+
+      <!--questionの投稿フォーム-->
+      <%= render "form", question: @question %>
+
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+
+      <%= render "index", questions: @questions %>
+    </div>
+
+  </div>
+</div>

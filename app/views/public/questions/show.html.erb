@@ -1,0 +1,46 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
+
+    <div class="col-md-3">
+
+      <!--ユーザー情報-->
+      <%= render "public/users/info", user: @user %>
+
+      <!--questionの新規投稿フォーム-->
+      <%= render "form", question: @new_question %>
+
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+  		<h2>Question detail</h2>
+
+  		<table class="table">
+  		  <tr>
+          <td><%= link_to @question.title, question_path(@question) %></td>
+
+          <td id="<%= @question.id %>_answer_count">アンサー数: <%= @question.answers.count %></td>
+
+          <% if @question.user == current_user %>
+            <td><%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-success" %></td>
+            <td>
+              <%= link_to "Destroy", question_path(@question), method: :delete,
+              data: { confirm: "”#{@question.title}”を削除しますか？\n ※このクエスチョンについたアンサーも一緒に削除されます。" },
+              class: "btn btn-sm btn-danger" %>
+            </td>
+          <% end %>
+        </tr>
+      </table>
+
+      <!--アンサーの一覧-->
+      <div class="<%= @question.id %>_answer_index"><%= render "public/answers/index", question: @question %></div>
+
+      <% if @question.user == current_user %>
+        <div id="<%= @question.id %>_answer_form"><%= render "public/answers/form", form: @form %></div>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
