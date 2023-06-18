@@ -81,11 +81,10 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "answer_id", null: false
+    t.bigint "answer_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_relationships_on_answer_id"
     t.index ["tag_id"], name: "index_relationships_on_tag_id"
   end
 
@@ -116,6 +115,5 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
   add_foreign_key "favorites", "answers"
   add_foreign_key "favorites", "users"
   add_foreign_key "questions", "users"
-  add_foreign_key "relationships", "answers"
   add_foreign_key "relationships", "tags"
 end
