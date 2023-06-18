@@ -10,6 +10,13 @@
       <td id="answer_<%= answer.id %>"><%= render "public/favorites/favorite-btn", answer: answer %></td>
 
       <td>
+        <%# answer.tags.each do |tag| %>
+          <%#= tag.name %>
+        <%# end %>
+        <i class="fa-solid fa-tag"></i><%= answer.tags.map(&:name).join(', ')%>
+      </td>
+
+      <td>
         <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-success" %>
         <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
         data: { confirm: "”#{answer.opinion}”を削除しますか？" }, class: "btn btn-danger" %>

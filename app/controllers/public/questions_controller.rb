@@ -15,7 +15,7 @@ class Public::QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @new_question = Question.new
-    @answer = Answer.new
+    @form = AnswerForm.new(answer: Answer.new(question: @question))
     @user = @question.user
   end
 
