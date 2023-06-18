@@ -1,0 +1,5 @@
+$(".<%= @question.id %>_answer_index").html("<%= j(render "public/answers/index", question: @question) %>");
+$("#<%= @question.id %>_answer_form").html("<%= j(render "public/answers/form", question: @question, form: @form) %>");
+
+$("#<%= @question.id %>_answer_count").html("アンサー数: <%= j(@question.answers.count) %>");
+$(".answer_text_area").val("")
