@@ -37,7 +37,7 @@
       <div class="<%= @question.id %>_answer_index"><%= render "public/answers/index", question: @question %></div>
 
       <% if @question.user == current_user %>
-        <div id="<%= @question.id %>_answer_form"><%= render "public/answers/form", question: @question, answer: @answer %></div>
+        <div id="<%= @question.id %>_answer_form"><%= render "public/answers/form", form: @form %></div>
       <% end %>
 
     </div>
