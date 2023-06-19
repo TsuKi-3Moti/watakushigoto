@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2023_06_18_192134) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -67,8 +66,6 @@ ActiveRecord::Schema.define(version: 2023_06_18_192134) do
     t.integer "design", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_favorites_on_answer_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -77,11 +74,10 @@ ActiveRecord::Schema.define(version: 2023_06_18_192134) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.bigint "answer_id", null: false
+    t.integer "answer_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -110,8 +106,4 @@ ActiveRecord::Schema.define(version: 2023_06_18_192134) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "answers", "questions"
-  add_foreign_key "favorites", "answers"
-  add_foreign_key "favorites", "users"
-  add_foreign_key "questions", "users"
 end
