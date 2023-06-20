@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_12_154659) do
+ActiveRecord::Schema.define(version: 2023_06_18_192134) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -67,8 +66,6 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
     t.integer "design", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_favorites_on_answer_id"
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -77,7 +74,6 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -85,8 +81,6 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_relationships_on_answer_id"
-    t.index ["tag_id"], name: "index_relationships_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -112,10 +106,4 @@ ActiveRecord::Schema.define(version: 2023_06_12_154659) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "answers", "questions"
-  add_foreign_key "favorites", "answers"
-  add_foreign_key "favorites", "users"
-  add_foreign_key "questions", "users"
-  add_foreign_key "relationships", "answers"
-  add_foreign_key "relationships", "tags"
 end
