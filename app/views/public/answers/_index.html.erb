@@ -1,29 +1,35 @@
-<h3>Answer</h3>
-<table class="table">
+<ol class="list-group list-group-flush">
+  <h3 class="list-group-item">Answer</h3>
   <% question.answers.each_with_index do |answer, i| %>
-    <tr>
+    <li class="list-group-item mt-3">
 
-      <td><%= i + 1 %></td>
+      <div class="h4">
+        <%= i + 1 %>.
+      </div>
 
-      <td><%= safe_join(answer.opinion.split("\n"),tag(:br)) %></td>
+      <div>
+        <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
+      </div>
 
-      <td id="answer_<%= answer.id %>"><%= render "public/favorites/favorite-btn", answer: answer %></td>
+      <div class="mt-3">
+        <i class="fa-solid fa-tag"></i> <%= answer.tags.map(&:name).join(', ')%>
+      </div>
 
-      <td>
-        <i class="fa-solid fa-tag"></i><%= answer.tags.map(&:name).join(', ')%>
-      </td>
+      <div class="d-flex align-items-end">
+        <span class="mr-3">
+          <%= l(answer.updated_at, format: :long) %>
+          <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
+        </span>
 
-      <td>
-        <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-success" %>
-        <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
-        data: { confirm: "このアンサーを削除しますか？" }, class: "btn btn-danger" %>
-      </td>
+        <span class="ml-auto">
+          <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-sm btn-outline-success" %>
+          <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
+          data: { confirm: "このアンサーを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+        </span>
+      </div>
 
-      <td>
-        <%= l(answer.updated_at, format: :long) %><br />
-        <%= time_ago_in_words(answer.updated_at, format: :distance_in_words) %>
-      </td>
+      <div id="answer_<%= answer.id %>" class="my-3"><%= render "public/favorites/favorite-btn", answer: answer %></div>
 
-    </tr>
+    </li>
   <% end %>
-</table>
+</ol>
