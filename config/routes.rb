@@ -26,12 +26,11 @@ Rails.application.routes.draw do
       resources :answers, only: [:create, :edit, :update, :destroy]
     end
 
-    resources :answers, only: [] do
+    resources :answers, only: [:index] do
       post "favorites/:design" => "favorites#create", as: "favorites"
       delete "favorites/:design" => "favorites#destroy", as: "favorites_destroy"
     end
 
-    get "tags/:name" => "tags#show", as: "tag"
     get "tags" => "tags#index", as: "tags"
 
   end

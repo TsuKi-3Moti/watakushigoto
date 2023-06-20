@@ -5,4 +5,8 @@ class Tag < ApplicationRecord
 
   validates :name, uniqueness: true
 
+  def self.tag_names
+    pluck(:name).join(",").split(/[，|,|　| ]/).map(&:to_s)
+  end
+
 end
