@@ -10,8 +10,32 @@
       <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
 
-        <!--ログイン後のナビゲーションバー-->
-        <% if user_signed_in? %>
+
+        <% if admin_signed_in? %>
+          <h4>管理者</h4>
+          <li>
+            <%= link_to admin_users_path, class: "nav-link text-light" do %>
+              <i class="fa-solid fa-house"></i> User
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to admin_questions_path, class: "nav-link text-light" do %>
+              <i class="fa-solid fa-q"></i> Question
+            <% end %>
+          </li>
+          <li>
+            <%=  link_to admin_tags_path, class: "nav-link text-light" do %>
+              <i class="fa-solid fa-tags"></i> Tag
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do %>
+              <i class="fa-solid fa-right-from-bracket"></i> Log out
+            <% end %>
+          </li>
+
+        <% elsif user_signed_in? %>
+          <h4><%= "#{current_user.name}" %></h4>
           <li>
             <%= link_to user_path(current_user), class: "nav-link text-light" do %>
               <i class="fa-solid fa-house"></i> Home
