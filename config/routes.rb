@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'tags/index'
+  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions:      "public/sessions"

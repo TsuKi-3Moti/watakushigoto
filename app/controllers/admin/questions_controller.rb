@@ -1,13 +1,18 @@
 class Admin::QuestionsController < ApplicationController
 
   def show
+    @question = Question.find(params[:id])
+    @user = @question.user
   end
 
   def index
+    @questions = Question.includes(:answers, :user)
   end
 
-  # 論理削除
   def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to admin_questions_path
   end
 
 end
