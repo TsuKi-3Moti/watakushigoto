@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
+  
+  get "searches/search" => "searches#search", as: "search"
 
   scope module: :public do
 
