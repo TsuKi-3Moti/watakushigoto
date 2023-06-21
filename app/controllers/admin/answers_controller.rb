@@ -1,10 +1,9 @@
 class Admin::AnswersController < ApplicationController
 
-  def update
-  end
-
-  # 論理削除
   def destroy
+    @question = Question.find(params[:question_id])
+    Answer.find(params[:id]).destroy!
+    redirect_to request.referer
   end
 
 end

@@ -35,7 +35,7 @@
         <tbody>
           <% @questions.each do |question| %>
             <tr>
-              <td><%= link_to question.title, question_path(question) %></td>
+              <td><%= link_to question.title, admin_question_path(question) %></td>
               <td><%= question.answers.count %></td>
 
               <% latest_answer = question.answers.last %>
@@ -47,7 +47,7 @@
               <% end %>
 
               <td>
-                <%= link_to user_path(question.user.id) do %>
+                <%= link_to admin_user_path(question.user.id) do %>
                   <%= image_tag question.user.get_profile_image(80, 80), class: "rounded-circle" %><br />
                   <%= question.user.name %>
                 <% end %>

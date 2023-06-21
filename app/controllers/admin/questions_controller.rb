@@ -2,7 +2,6 @@ class Admin::QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @user = @question.user
   end
 
   def index

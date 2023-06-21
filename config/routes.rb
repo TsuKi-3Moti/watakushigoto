@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'tags/index'
-  end
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions:      "public/sessions"
@@ -31,13 +28,12 @@ Rails.application.routes.draw do
       resources :answers, only: [:create, :edit, :update, :destroy]
     end
 
-    resources :answers, only: [:index] do
+    resources :answers, only: :index do
       post "favorites/:design" => "favorites#create", as: "favorites"
       delete "favorites/:design" => "favorites#destroy", as: "favorites_destroy"
     end
 
-    get "tags" => "tags#index", as: "tags"
-
+    resources :tags, only: :index
   end
 
   namespace :admin do
@@ -47,13 +43,12 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index, :edit, :update]
 
     resources :questions, only: [:show, :index, :destroy] do
-      resources :answers, only: [:destroy]
+      resources :answers, only: :destroy
     end
 
-    resources :answers, only: [:index]
+    resources :answers, only: :index
 
-    get "tags" => "tags#index", as: "tags"
-
+    resources :tags, only: [:index, :destroy], param: :name
   end
 
 end

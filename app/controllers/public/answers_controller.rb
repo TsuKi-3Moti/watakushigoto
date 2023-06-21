@@ -34,7 +34,8 @@ class Public::AnswersController < ApplicationController
 
   def destroy
     @question = Question.find(params[:question_id])
-    Answer.find(params[:id]).destroy
+    Answer.find(params[:id]).destroy!
+    redirect_to request.referer
   end
 
   private

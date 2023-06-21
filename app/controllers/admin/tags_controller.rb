@@ -4,4 +4,9 @@ class Admin::TagsController < ApplicationController
     @tags = Tag.all
   end
 
+  def destroy
+    Tag.find_by!(name: params[:name]).destroy!
+    redirect_to request.referer
+  end
+
 end
