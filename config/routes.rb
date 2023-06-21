@@ -5,10 +5,10 @@ Rails.application.routes.draw do
     sessions:      "public/sessions"
   }
 
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
+
   get "searches/search" => "searches#search", as: "search"
 
   scope module: :public do
@@ -44,8 +44,12 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index, :edit, :update]
 
     resources :questions, only: [:show, :index, :destroy] do
-      resources :answers, only: [:update, :destroy]
+      resources :answers, only: [:destroy]
     end
+
+    resources :answers, only: [:index]
+
+    get "tags" => "tags#index", as: "tags"
 
   end
 
