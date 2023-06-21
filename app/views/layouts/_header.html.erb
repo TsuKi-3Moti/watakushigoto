@@ -7,7 +7,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
 
         <!--ログイン後のナビゲーションバー-->
@@ -60,14 +60,13 @@
         </ul>
 
         <!--検索フォーム-->
-        <!--<div class="form-inline my-2 float-right">-->
-          <%#= form_with url: search_path, method: :get, local: true do |f| %>
-            <%#= f.text_field :word, placeholder: "検索", class: "form-control" %>
-            <%#= f.submit class: "btn my-2 my-sm-0 search_btn" do %>
-              <!--<i class="fa-solid fa-magnifying-glass"></i>-->
-            <%# end %>
-          <%# end %>
-        <!--</div>-->
+        <div class="form-group form-inline my-2 float-right">
+          <%= form_with url: search_path, method: :get, local: true do |f| %>
+            <%= f.select :model, options_for_select({"Question" => "question", "Answer" => "answer"}), {},class: "form-control form-control-sm" %>
+            <%= f.text_field :word, placeholder: "検索", class: "form-control form-control-sm" %>
+            <%= f.submit "🔍", class: "btn btn-sm btn-warning search_btn" %>
+          <% end %>
+        </div>
 
       </div>
     </div>
