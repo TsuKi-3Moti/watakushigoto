@@ -6,7 +6,7 @@
     <div class="col-md-3">
 
       <!--ユーザー情報-->
-      <%= render "public/users/info", user: @user %>
+      <%= render "public/users/info", user: @question.user %>
 
       <!--questionの新規投稿フォーム-->
       <%= render "form", question: @new_question %>
@@ -35,7 +35,7 @@
 
       <!--アンサーの一覧-->
       <div class="<%= @question.id %>_answer_index"><%= render "public/answers/index", question: @question %></div>
-
+      <!--アンサーのフォーム-->
       <% if @question.user == current_user %>
         <div id="<%= @question.id %>_answer_form"><%= render "public/answers/form", form: @form %></div>
       <% end %>

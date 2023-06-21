@@ -1,0 +1,32 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
+
+    <div class="col-md-3">
+
+      <!--ユーザー情報-->
+      <%= render "public/users/info", user: current_user %>
+
+      <!--questionの投稿フォーム-->
+      <%= render "public/questions/form", question: @question %>
+
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+
+      <h3 class="row border-bottom pb-3">タグ一覧</h3>
+
+      <% @tags.each do |tag| %>
+        <div class="btn">
+          <%= link_to answers_path(name: tag.name), class: "btn btn-sm btn-outline-info rounded-pill" do %>
+            <i class="fa-solid fa-tag"></i><%= tag.name %>
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>
+

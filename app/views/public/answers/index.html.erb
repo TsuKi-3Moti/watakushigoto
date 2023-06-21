@@ -1,0 +1,65 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
+
+    <div class="col-md-3">
+      <!--ユーザー情報-->
+      <%= render "public/users/info", user: current_user %>
+
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+
+    <h3 class="row border-bottom pb-3 text-info"><i class="fa-solid fa-tag"></i><%= @tag.name %> の検索結果</h3>
+    <span>(全<%= @answers.count %>件)</span>
+
+      <% @answers.each_with_index do |answer, i| %>
+        <li class="list-group-item mt-3">
+
+          <div class="h4">
+            <%= i + 1 %>.
+          </div>
+
+          <div>
+            <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
+          </div>
+
+          <div>
+            <% answer.tags.each do |tag| %>
+              <%= link_to answers_path(name: tag.name), class: "btn btn-sm btn-outline-info rounded-pill" do %>
+                <i class="fa-solid fa-tag"></i><%= tag.name %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="d-flex align-items-end">
+            <span class="mr-3">
+              <%= l(answer.updated_at, format: :long) %>
+              <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
+            </span>
+
+          <% if answer.question.user == current_user %>
+            <span class="ml-auto">
+              <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-sm btn-outline-success" %>
+              <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
+              data: { confirm: "このアンサーを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+            </span>
+          <% end %>
+          </div>
+
+          <div id="answer_<%= answer.id %>" class="my-3"><%= render "public/favorites/favorite-btn", answer: answer %></div>
+
+        </li>
+      <% end %>
+
+        <% if @answers.empty? %>
+          <div class="h4 text-center">
+            該当するアンサーはありませんでした。
+          </div>
+        <% end %>
+
+    </div>
+
+  </div>
+</div>

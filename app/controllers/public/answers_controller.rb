@@ -9,6 +9,15 @@ class Public::AnswersController < ApplicationController
     end
   end
 
+  def index
+    if params[:name]
+      @tag = Tag.find_by(name: params[:name])
+      @answers = @tag.answers.all
+    else
+      redirect_to root_path
+    end
+  end
+
   def edit
     @form = AnswerForm.new(answer: Answer.find(params[:id]))
   end
