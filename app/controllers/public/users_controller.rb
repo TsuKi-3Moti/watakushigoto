@@ -20,16 +20,16 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  def unsubscribe
-  end
+  # def unsubscribe
+  # end
 
-  def withdraw
-  end
+  # def withdraw
+  # end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image, :introduction)
+    params.require(:user).permit(:name, :profile_image, :introduction, :email)
   end
 
   def ensure_correct_user
