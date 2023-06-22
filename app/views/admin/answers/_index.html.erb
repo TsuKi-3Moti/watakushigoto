@@ -4,39 +4,41 @@
   <% question.answers.each_with_index do |answer, i| %>
     <li class="list-group-item mt-3">
 
+      <!--アンサー番号-->
       <div class="h4">
         <%= i + 1 %>.
       </div>
 
+      <!--アンサー本文-->
       <div>
         <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
       </div>
 
+      <!--アンサーについているタグ-->
       <div class="mt-3">
         <% answer.tags.each do |tag| %>
-          <%= link_to answers_path(name: tag.name), class: "btn btn-sm btn-outline-info rounded-pill" do %>
-            <i class="fa-solid fa-tag"></i><%= tag.name %>
-          <% end %>
+          <%= tag.name %>
         <% end %>
       </div>
 
+      <!--アンサーした日時-->
       <div class="d-flex align-items-end">
         <span class="mr-3">
           <%= l(answer.updated_at, format: :long) %>
           <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
         </span>
 
-      <% if answer.question.user == current_user %>
+      <!--アンサーの削除ボタン-->
         <span class="ml-auto">
-          <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-sm btn-outline-success" %>
-          <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: false,
-          data: { confirm: "このアンサーを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+          <%= link_to "Destroy", admin_question_answer_path(answer.question, answer), method: :delete, remote: false,
+          data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
         </span>
-      <% end %>
       </div>
 
-      <div id="answer_<%= answer.id %>" class="my-3"><%= render "public/favorites/favorite-btn", answer: answer %></div>
+      <!--アンサーのいいね数-->
+      <span>Favorites : <%= answer.favorites.count %></span>
 
     </li>
   <% end %>
+
 </ol>

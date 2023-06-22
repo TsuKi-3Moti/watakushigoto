@@ -34,17 +34,14 @@ class Public::AnswersController < ApplicationController
 
   def destroy
     @question = Question.find(params[:question_id])
-    Answer.find(params[:id]).destroy
+    Answer.find(params[:id]).destroy!
+    redirect_to request.referer
   end
 
   private
 
   def answer_params
     params.require(:answer).permit(:opinion, :input_tag_name)
-  end
-
-  def answer_find
-    @answer = Answer.find(params[:id])
   end
 
 end

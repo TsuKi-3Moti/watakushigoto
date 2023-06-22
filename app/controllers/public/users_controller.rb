@@ -20,16 +20,23 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  def unsubscribe
+  def favorites
+    @question = Question.new
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:answer_id)
+    @favorited_answers = Answer.find(favorites)
   end
 
-  def withdraw
-  end
+  # def unsubscribe
+  # end
+
+  # def withdraw
+  # end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image, :introduction)
+    params.require(:user).permit(:name, :profile_image, :introduction, :email)
   end
 
   def ensure_correct_user

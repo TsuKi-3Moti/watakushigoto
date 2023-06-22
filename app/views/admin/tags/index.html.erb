@@ -1,0 +1,42 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <!--エラー文-->
+    <%#= render "layouts/errors", obj: @question %>
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <div class="d-flex flex-column">
+
+        <!--名前-->
+        <h5 class="lead font-weight-bold">管理者</h5>
+
+        <span>
+          管理者でログインしています。<br />
+          questionの削除や、タグの削除などが可能です。
+        </span>
+
+      </div>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+
+      <h2 class="row border-bottom pb-3">Tags</h2>
+
+      <% @tags.each do |tag| %>
+        <div class="btn">
+          <%= link_to admin_answers_path(name: tag.name), class: "btn btn-sm btn-outline-info rounded-pill" do %>
+            <i class="fa-solid fa-tag"></i><%= tag.name %>
+          <% end %>
+
+          <%= link_to admin_tag_path(name: tag.name), method: :delete,
+            data: { confirm: "” #{tag.name} ”を削除しますか？" },
+            class: "text-danger rounded-circle" do %>
+            <i class="fa-solid fa-trash-can"></i>
+          <% end %>
+
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>

@@ -16,7 +16,6 @@ class Public::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @new_question = Question.new
     @form = AnswerForm.new(answer: Answer.new(question: @question))
-    @user = @question.user
   end
 
   def index

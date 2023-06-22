@@ -17,40 +17,35 @@ Rails.application.routes.draw do
     get "about" => "homes#about", as: "about"
 
     resources :users, only: [:show, :edit, :update] do
-      collection do
-        post "unsubscribe"
-        get  "withdraw"
-        get  "favorites"
-      end
+      get :favorites, on: :member
     end
 
     resources :questions, only: [:create, :show, :index, :update, :edit, :destroy] do
       resources :answers, only: [:create, :edit, :update, :destroy]
     end
 
-    resources :answers, only: [:index] do
-      post "favorites/:design" => "favorites#create", as: "favorites"
-      delete "favorites/:design" => "favorites#destroy", as: "favorites_destroy"
+    resources :answers, only: :index do
+      resources :favorites, only: [:create, :destroy], param: :design, constraints: { code: /\d+/ }
     end
 
-    get "tags" => "tags#index", as: "tags"
-
+    resources :tags, only: :index
   end
 
   namespace :admin do
 
     root to: "homes#top"
 
-    resources :users, only: [:show, :index, :edit, :update]
-
-    resources :questions, only: [:show, :index, :destroy] do
-      resources :answers, only: [:destroy]
+    resources :users, only: [:show, :index, :edit, :update] do
+      get :favorites, on: :member
     end
 
-    resources :answers, only: [:index]
+    resources :questions, only: [:show, :index, :destroy] do
+      resources :answers, only: :destroy
+    end
 
-    get "tags" => "tags#index", as: "tags"
+    resources :answers, only: :index
 
+    resources :tags, only: [:index, :destroy], param: :name
   end
 
 end
