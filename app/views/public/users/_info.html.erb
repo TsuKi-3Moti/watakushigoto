@@ -31,7 +31,7 @@
     <tr>
       <th>favorites</th>
       <th>
-        <%= link_to user.favorites.count, favorites_users_path %>
+        <%= link_to user.favorites.count, favorites_user_path(user) %>
       </th>
     </tr>
   <% end %>

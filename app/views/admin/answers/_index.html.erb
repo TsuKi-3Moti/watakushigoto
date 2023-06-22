@@ -31,12 +31,12 @@
       <!--アンサーの削除ボタン-->
         <span class="ml-auto">
           <%= link_to "Destroy", admin_question_answer_path(answer.question, answer), method: :delete, remote: false,
-          data: { confirm: "このアンサーを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+          data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
         </span>
       </div>
 
       <!--アンサーのいいね数-->
-      <span>いいね数: <%= answer.favorites.count %></span>
+      <span>Favorites : <%= answer.favorites.count %></span>
 
     </li>
   <% end %>

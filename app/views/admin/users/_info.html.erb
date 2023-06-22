@@ -28,7 +28,7 @@
 <table class="table">
 
   <tr>
-    <th>ユーザーID</th>
+    <th>User ID</th>
     <th><%= user.id %></th>
   </tr>
 
@@ -39,10 +39,10 @@
 
   <!--いいねした投稿一覧-->
   <tr>
-    <th>favorites</th>
-    <!--<th>-->
-    <!--  <%#= link_to user.favorites.count, favorites_users_path %>-->
-    <!--</th>-->
+    <th>Favorites</th>
+    <th>
+      <%= link_to user.favorites.count, favorites_admin_user_path(user) %>
+    </th>
   </tr>
 
 </table>

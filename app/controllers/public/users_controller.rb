@@ -20,6 +20,13 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  def favorites
+    @question = Question.new
+    @user = User.find(params[:id])
+    favorites = Favorite.where(user_id: @user.id).pluck(:answer_id)
+    @favorited_answers = Answer.find(favorites)
+  end
+
   # def unsubscribe
   # end
 

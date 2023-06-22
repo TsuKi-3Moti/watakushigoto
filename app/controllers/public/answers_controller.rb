@@ -44,8 +44,4 @@ class Public::AnswersController < ApplicationController
     params.require(:answer).permit(:opinion, :input_tag_name)
   end
 
-  def answer_find
-    @answer = Answer.find(params[:id])
-  end
-
 end
