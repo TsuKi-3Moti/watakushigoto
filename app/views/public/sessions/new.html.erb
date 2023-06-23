@@ -5,7 +5,7 @@
     <div class="col-lg-4 col-md-5 col-sm-6 text-center bg-info rounded-circle mb-3 mx-3">
       <div class="text-center text-white m-4">
         <h5>ゲストログイン</h5>
-        <h6>Gest Log in</h6>
+        <h6>Guest Log in</h6>
         <p>お試しでログイン</p>
       </div>
     </div>
@@ -35,7 +35,7 @@
       <p class="text-center my-2">既にアカウントをお持ちの方</p>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="row justify-content-center flex-column">
+        <div class="row justify-content-center flex-column p-3">
 
           <%= render "layouts/error_messages", resource: resource %>
 
