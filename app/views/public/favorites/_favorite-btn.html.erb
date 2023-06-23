@@ -1,23 +1,22 @@
 <% if answer.favorited_by?(current_user) %>
 
-  <%#= link_to answer_favorites_path(answer), method: :delete, remote: true do %>
-  <% if current_user.favorites.last.design == 'handshake' %>
+  <% design = answer.favorites.find_by(user_id: current_user.id).design %>
+
+  <% if design == 'handshake' %>
     <%= link_to "<i class='fa-solid fa-handshake' style='color: #ff7300;'></i>".html_safe,      answer_favorite_path(answer, 0), method: :delete, remote: true %>
-  <% elsif current_user.favorites.last.design == 'applause' %>
+  <% elsif design == 'applause' %>
     <%= link_to "<i class='fa-solid fa-hands-clapping' style='color: #ff9d14;'></i>".html_safe, answer_favorite_path(answer, 1), method: :delete, remote: true %>
-  <% elsif current_user.favorites.last.design == 'heart' %>
+  <% elsif design == 'heart' %>
     <%= link_to "<i class='fa-solid fa-heart' style='color: #ff2e6d;'></i>".html_safe,          answer_favorite_path(answer, 2), method: :delete, remote: true %>
-  <% elsif current_user.favorites.last.design == 'realize' %>
+  <% elsif design == 'realize' %>
     <%= link_to "<i class='fa-solid fa-lightbulb' style='color: #ffe438;'></i>".html_safe,      answer_favorite_path(answer, 3), method: :delete, remote: true %>
   <% else %>
     <%= link_to "<i class='fa-solid fa-face-sad-tear' style='color: #7bdd46;'></i>".html_safe,  answer_favorite_path(answer, 4), method: :delete, remote: true %>
   <% end %>
   (<%= answer.favorites.count %>)
-  <%# end %>
 
 <% else %>
 
-<%#= link_to answer_favorites_path(answer), method: :post, remote: true do %>
   <%= link_to t('favorite.design.handshake').html_safe, answer_favorites_path(answer, design: 0), method: :post, remote: true %>
   (<%= answer.favorites.where(design: 'handshake').count %>)
 
@@ -32,5 +31,5 @@
 
   <%= link_to t('favorite.design.crying').html_safe,    answer_favorites_path(answer, design: 4), method: :post, remote: true %>
   (<%= answer.favorites.where(design: 'crying').count %>)
-<%# end %>
+
 <% end %>

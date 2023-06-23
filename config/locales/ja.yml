@@ -3,20 +3,36 @@ ja:
   activerecord:
     errors:
       messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        record_invalid: "バリデーションに失敗しました: %{errors}"
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     model:
       user: "ユーザー"
+      admin: "管理者"
+      answer: "アンサー"
+      favorite: "いいね"
+      question: "クエスチョン"
+      tag: "タグ"
     attributes:
       user:
-        name: "名前"
+        name: "ニックネーム"
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         introduction: "自己紹介"
         profile_image: "プロフィール画像"
+      admin:
+        email: "メールアドレス"
+        password: "パスワード"
+      answer:
+        opinion: "説明"
+      favorite:
+        design: "デザイン"
+      question:
+        title: "タイトル"
+      tag:
+        name: "タグ名"
   date:
     abbr_day_names:
     - 日
@@ -95,31 +111,31 @@ ja:
   errors:
     format: "%{message}"
     messages:
-      accepted: "を受諾してください"
-      blank: "を入力してください"
-      confirmation: "と%{attribute}の入力が一致しません"
-      empty: "を入力してください"
-      equal_to: "は%{count}にしてください"
-      even: "は偶数にしてください"
-      exclusion: "は予約されています"
-      greater_than: "は%{count}より大きい値にしてください"
-      greater_than_or_equal_to: "は%{count}以上の値にしてください"
-      in: "は%{count}の範囲に含めてください"
-      inclusion: "は一覧にありません"
-      invalid: "は不正な値です"
-      less_than: "は%{count}より小さい値にしてください"
-      less_than_or_equal_to: "は%{count}以下の値にしてください"
+      accepted: "%{attribute}を受諾してください"
+      blank: "%{attribute}を入力してください"
+      confirmation: "確認パスワードと%{attribute}の入力が一致しません"
+      empty: "%{attribute}を入力してください"
+      equal_to: "%{attribute}は%{count}にしてください"
+      even: "%{attribute}は偶数にしてください"
+      exclusion: "%{attribute}は予約されています"
+      greater_than: "%{attribute}は%{count}より大きい値にしてください"
+      greater_than_or_equal_to: "%{attribute}は%{count}以上の値にしてください"
+      in: "%{attribute}は%{count}の範囲に含めてください"
+      inclusion: "%{attribute}は一覧にありません"
+      invalid: "%{attribute}が正しくありません"
+      less_than: "%{attribute}は%{count}以下で入力にしてください"
+      less_than_or_equal_to: "%{attribute}は%{count}以下の値にしてください"
       model_invalid: "バリデーションに失敗しました: %{errors}"
-      not_a_number: "は数値で入力してください"
-      not_an_integer: "は整数で入力してください"
-      odd: "は奇数にしてください"
-      other_than: "は%{count}以外の値にしてください"
-      present: "は入力しないでください"
-      required: "を入力してください"
+      not_a_number: "%{attribute}は数値で入力してください"
+      not_an_integer: "%{attribute}は整数で入力してください"
+      odd: "%{attribute}は奇数にしてください"
+      other_than: "%{attribute}は%{count}以外の値にしてください"
+      present: "%{attribute}は入力しないでください"
+      required: "%{attribute}を入力してください"
       taken: "こちらの%{attribute}は既に存在しています"
-      too_long: "は%{count}文字以内で入力してください"
-      too_short: "は%{count}文字以上で入力してください"
-      wrong_length: "は%{count}文字で入力してください"
+      too_long: "%{attribute}は%{count}文字以内で入力してください"
+      too_short: "%{attribute}は%{count}文字以上で入力してください"
+      wrong_length: "%{attribute}は%{count}文字で入力してください"
     template:
       body: "次の項目を確認してください"
       header: "%{model}に%{count}個のエラーが発生しました"
@@ -127,9 +143,9 @@ ja:
     select:
       prompt: "選択してください"
     submit:
-      create: "登録する"
-      submit: "保存する"
-      update: "更新する"
+      create: "登録"
+      submit: "保存"
+      update: "更新"
   number:
     currency:
       format:
@@ -156,9 +172,9 @@ ja:
           quadrillion: "千兆"
           thousand: "千"
           trillion: "兆"
-          unit: ''
+          unit: ""
       format:
-        delimiter: ''
+        delimiter: ""
         precision: 3
         significant: true
         strip_insignificant_zeros: true
@@ -174,11 +190,11 @@ ja:
           tb: "TB"
     percentage:
       format:
-        delimiter: ''
+        delimiter: ""
         format: "%n%"
     precision:
       format:
-        delimiter: ''
+        delimiter: ""
   support:
     array:
       last_word_connector: "、"
