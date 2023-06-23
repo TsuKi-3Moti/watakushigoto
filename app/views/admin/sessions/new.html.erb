@@ -1,24 +1,44 @@
-<h2>管理者Log in</h2>
+<div class="container">
+  <div class="row justify-content-center p-3">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="col-md-6">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <div class="row">
+        <h3 class="col-xl-6 text-center">管理者ログイン</h3>
+        <h4 class="col-xl-6 text-center">Admin Log in</h4>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <p class="text-center my-2">こちらは管理者用です</p>
+
+      <%= form_with model: User.new, url: admin_session_path, id: "new_user",
+        class: "new_user", local: true do |f| %>
+
+        <%= render "layouts/error_messages", resource: resource %>
+
+        <div class="row justify-content-center flex-column">
+
+          <div class="col field form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",
+            placeholder: "✉️メールアドレス", required: true, class: "form-control" %>
+          </div>
+
+          <div class="col field form-group">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+            <p class="d-inline">(<%= @minimum_password_length %> 文字以上)</p>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password",
+            placeholder: "🔒パスワード", required: true, class: "form-control" %>
+          </div>
+
+          <div class="col actions form-group">
+            <%= f.submit "ログイン", class: "btn btn-success btn-block" %>
+          </div>
+        </div>
+      <% end %>
+
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>

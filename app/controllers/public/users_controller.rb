@@ -14,8 +14,9 @@ class Public::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(current_user.id)
+      redirect_to user_path(current_user.id), notice: "ユーザ情報を更新しました"
     else
+      flash.now[:alert] = "ユーザ情報を更新できませんでした"
       render :edit
     end
   end
@@ -26,12 +27,6 @@ class Public::UsersController < ApplicationController
     favorites = Favorite.where(user_id: @user.id).pluck(:answer_id)
     @favorited_answers = Answer.find(favorites)
   end
-
-  # def unsubscribe
-  # end
-
-  # def withdraw
-  # end
 
   private
 

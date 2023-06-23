@@ -5,8 +5,8 @@ class Admin::TagsController < ApplicationController
   end
 
   def destroy
-    Tag.find_by!(name: params[:name]).destroy!
-    redirect_to request.referer
+    Tag.find_by(name: params[:name]).destroy
+    redirect_to request.referer, notice: "Tagが削除されました"
   end
 
 end
