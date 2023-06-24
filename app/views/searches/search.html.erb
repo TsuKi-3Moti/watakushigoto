@@ -5,7 +5,7 @@
     <% if @model == "question" %>
 
       <h3>"<%= @word %>"を含むクエスチョン検索結果</h3>
-      <span>(全<%= @records.count %>件)</span>
+      <span>(全<%= @records.total_count %>件)</span>
 
       <table class="table">
 
@@ -44,6 +44,8 @@
 
       </table>
 
+      <%= paginate @records, theme: "twitter-bootstrap-4" %>
+
       <% if @records.empty? %>
         <div class="h4 text-center">
           該当するクエスチョンはありませんでした。
@@ -53,7 +55,7 @@
     <% else @model == "answer" %>
 
       <h3>"<%= @word %>" を含むアンサー検索結果</h3>
-      <span>(全<%= @records.count %>件)</span>
+      <span>(全<%= @records.total_count %>件)</span>
 
       <% @records.each_with_index do |answer, i| %>
         <li class="list-group-item mt-3">
@@ -95,6 +97,8 @@
 
         </li>
       <% end %>
+
+      <%= paginate @records, theme: "twitter-bootstrap-4" %>
 
       <% if @records.empty? %>
         <div class="h4 text-center">

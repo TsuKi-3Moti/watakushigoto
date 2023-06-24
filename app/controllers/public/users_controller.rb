@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @question = Question.new
-    @questions = @user.questions
+    @questions = @user.questions.order(created_at: :desc).page(params[:page])
   end
 
   def index
@@ -30,8 +30,7 @@ class Public::UsersController < ApplicationController
   def favorites
     @question = Question.new
     @user = User.find(params[:id])
-    favorites = Favorite.where(user_id: @user.id).pluck(:answer_id)
-    @favorited_answers = Answer.find(favorites)
+    @favorited_answers = Answer.left_joins(:favorites).where(favorites: {user: @user}).order(created_at: :desc).page(params[:page])
   end
 
   private

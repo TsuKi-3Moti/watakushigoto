@@ -17,21 +17,24 @@
       <!--アンサーについているタグ-->
       <div class="mt-3">
         <% answer.tags.each do |tag| %>
-          <%= tag.name %>
+          <%= link_to admin_answers_path(name: tag.name),
+            class: "btn btn-sm btn-outline-info rounded-pill" do %>
+            <i class="fa-solid fa-tag"></i><%= tag.name %>
+          <% end %>
         <% end %>
       </div>
 
-      <!--アンサーした日時-->
       <div class="d-flex align-items-end">
+        <!--アンサーした日時-->
         <span class="mr-3">
           <%= l(answer.updated_at, format: :long) %>
           <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
         </span>
 
-      <!--アンサーの削除ボタン-->
+        <!--アンサーの削除ボタン-->
         <span class="ml-auto">
           <%= link_to "Destroy", admin_question_answer_path(answer.question, answer), method: :delete, remote: false,
-          data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+            data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
         </span>
       </div>
 

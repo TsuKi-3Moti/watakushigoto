@@ -1,11 +1,13 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
+
     <!--エラー文-->
     <%#= render "layouts/errors", obj: @question %>
+
     <div class="col-md-3">
       <h2>User info</h2>
-      <div class="d-flex flex-column">
 
+      <div class="d-flex flex-column">
         <!--名前-->
         <h5 class="lead font-weight-bold">管理者</h5>
 
@@ -13,7 +15,6 @@
           管理者でログインしています。<br />
           questionの削除や、タグの削除などが可能です。
         </span>
-
       </div>
     </div>
 
@@ -27,6 +28,7 @@
             <i class="fa-solid fa-tag"></i><%= tag.name %>
           <% end %>
 
+          <!--タグの削除ボタン-->
           <%= link_to admin_tag_path(name: tag.name), method: :delete,
             data: { confirm: "” #{tag.name} ”を削除しますか？" },
             class: "text-danger rounded-circle" do %>
@@ -35,6 +37,8 @@
 
         </div>
       <% end %>
+
+      <%= paginate @tags, theme: "twitter-bootstrap-4" %>
 
     </div>
 

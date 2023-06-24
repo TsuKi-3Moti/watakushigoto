@@ -20,7 +20,7 @@ class Public::QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.includes(:answers, :user)
+    @questions = Question.includes(:answers, :user).order(created_at: :desc).page(params[:page])
     @question = Question.new
   end
 
