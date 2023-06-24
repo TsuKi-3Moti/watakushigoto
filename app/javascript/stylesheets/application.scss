@@ -1,1 +1,49 @@
 @use '~bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Josefin+Sans:wght@600&family=Klee+One:wght@600&display=swap');
+
+
+
+  body {
+    font-family: 'Comfortaa','Klee One', cursive;
+    height: 100%;
+    background-image: url("../../assets/images/p0026.jpg");
+    .nav-link {
+      color: #674ea7;
+      background-color: #fff8e5;
+      border: thin solid;
+    }
+  }
+
+  header {
+    background-image: url("../../assets/images/p0129.jpg");
+    background-position: bottom center;
+  }
+
+  footer {
+    background-image: url("../../assets/images/p0147.jpg");
+    color: #fff8e5;
+  }
+
+  .logo {
+    background-color: #fff8e5;
+    border: 4px double;
+    color: #674ea7;
+  }
+
+  .logo-top {
+    border-bottom-style: dashed;
+  }
+
+  .logo-bottom {
+    font-size: 0.75rem;
+  }
+
+  .navbar-toggler {
+    background-color: rgba(103,78,167,0.5);
+    border-color: #ffffff;
+  }
+
+  .navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
