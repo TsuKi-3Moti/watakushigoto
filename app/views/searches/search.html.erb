@@ -60,15 +60,18 @@
       <% @records.each_with_index do |answer, i| %>
         <li class="list-group-item mt-3">
 
+          <!--アンサー番号-->
           <div class="h4">
             <%= i + 1 %>.
           </div>
 
+          <!--アンサー本文-->
           <div>
             <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
           </div>
 
-          <div>
+          <!--アンサーについているタグ-->
+          <div class="my-3">
             <% answer.tags.each do |tag| %>
               <%= link_to answers_path(name: tag.name), class: "btn btn-sm btn-outline-info rounded-pill" do %>
                 <i class="fa-solid fa-tag"></i><%= tag.name %>
@@ -77,7 +80,8 @@
           </div>
 
           <div class="d-flex align-items-end">
-            <span class="mr-3">
+            <!--アンサーした日時-->
+            <span class="pr-3">
               <%= l(answer.updated_at, format: :long) %>
               <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
             </span>
@@ -91,9 +95,14 @@
             <% end %>
           </div>
 
-          <div id="answer_<%= answer.id %>" class="my-3">
-            <%= render "public/favorites/favorite-btn", answer: answer %>
-          </div>
+          <!--アンサーのいいね数-->
+          <% if user_signed_in? %>
+            <div id="answer_<%= answer.id %>" class="my-3">
+              <%= render "public/favorites/favorite-btn", answer: answer %>
+            </div>
+          <% else %>
+            <div class="my-3">Favorites : <%= answer.favorites.count %></div>
+          <% end %>
 
         </li>
       <% end %>

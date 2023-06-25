@@ -1,8 +1,8 @@
-<ol class="list-group list-group-flush">
-  <h3 class="list-group-item">Answer</h3>
+<ol class="list-group list-group-flush mb-3">
+  <h3 class="list-group-item mb-0">Answer</h3>
 
   <% question.answers.each_with_index do |answer, i| %>
-    <li class="list-group-item mt-3">
+    <li class="list-group-item pt-3">
 
       <!--アンサー番号-->
       <div class="h4">
@@ -15,7 +15,7 @@
       </div>
 
       <!--アンサーについているタグ-->
-      <div class="mt-3">
+      <div class="my-3">
         <% answer.tags.each do |tag| %>
           <%= link_to admin_answers_path(name: tag.name),
             class: "btn btn-sm btn-outline-info rounded-pill" do %>
@@ -26,8 +26,8 @@
 
       <div class="d-flex align-items-end">
         <!--アンサーした日時-->
-        <span class="mr-3">
-          <%= l(answer.updated_at, format: :long) %>
+        <span class="pr-3">
+          <%= l(answer.updated_at, format: :long) %><br />
           <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
         </span>
 
@@ -39,7 +39,7 @@
       </div>
 
       <!--アンサーのいいね数-->
-      <span>Favorites : <%= answer.favorites.count %></span>
+      <div class="my-3">Favorites : <%= answer.favorites.count %></div>
 
     </li>
   <% end %>
