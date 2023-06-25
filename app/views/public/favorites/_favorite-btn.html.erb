@@ -2,34 +2,46 @@
 
   <% design = answer.favorites.find_by(user_id: current_user.id).design %>
 
-  <% if design == 'handshake' %>
-    <%= link_to "<i class='fa-solid fa-handshake' style='color: #ff7300;'></i>".html_safe,      answer_favorite_path(answer, 0), method: :delete, remote: true %>
-  <% elsif design == 'applause' %>
-    <%= link_to "<i class='fa-solid fa-hands-clapping' style='color: #ff9d14;'></i>".html_safe, answer_favorite_path(answer, 1), method: :delete, remote: true %>
-  <% elsif design == 'heart' %>
-    <%= link_to "<i class='fa-solid fa-heart' style='color: #ff2e6d;'></i>".html_safe,          answer_favorite_path(answer, 2), method: :delete, remote: true %>
-  <% elsif design == 'realize' %>
-    <%= link_to "<i class='fa-solid fa-lightbulb' style='color: #ffe438;'></i>".html_safe,      answer_favorite_path(answer, 3), method: :delete, remote: true %>
-  <% else %>
-    <%= link_to "<i class='fa-solid fa-face-sad-tear' style='color: #7bdd46;'></i>".html_safe,  answer_favorite_path(answer, 4), method: :delete, remote: true %>
-  <% end %>
-  (<%= answer.favorites.count %>)
+  <div class="pr-2">
+    <% if design == 'handshake' %>
+      <%= link_to "<i class='fa-solid fa-handshake' style='color: #ff7300;'></i>".html_safe,      answer_favorite_path(answer, 0), method: :delete, remote: true %>
+    <% elsif design == 'applause' %>
+      <%= link_to "<i class='fa-solid fa-hands-clapping' style='color: #ff9d14;'></i>".html_safe, answer_favorite_path(answer, 1), method: :delete, remote: true %>
+    <% elsif design == 'heart' %>
+      <%= link_to "<i class='fa-solid fa-heart' style='color: #ff2e6d;'></i>".html_safe,          answer_favorite_path(answer, 2), method: :delete, remote: true %>
+    <% elsif design == 'realize' %>
+      <%= link_to "<i class='fa-solid fa-lightbulb' style='color: #ffe438;'></i>".html_safe,      answer_favorite_path(answer, 3), method: :delete, remote: true %>
+    <% else %>
+      <%= link_to "<i class='fa-solid fa-face-sad-tear' style='color: #7bdd46;'></i>".html_safe,  answer_favorite_path(answer, 4), method: :delete, remote: true %>
+    <% end %>
+    <%= answer.favorites.count %>
+  </div>
 
 <% else %>
 
-  <%= link_to t('favorite.design.handshake').html_safe, answer_favorites_path(answer, design: 0), method: :post, remote: true %>
-  (<%= answer.favorites.where(design: 'handshake').count %>)
+  <span class="pr-2 not_yet_favorited">
+    <%= link_to t('favorite.design.handshake').html_safe, answer_favorites_path(answer, design: 0), method: :post, remote: true, class: "not_yet_favorited" %>
+    <%= answer.favorites.where(design: 'handshake').count %>
+  </span>
 
-  <%= link_to t('favorite.design.applause').html_safe,  answer_favorites_path(answer, design: 1), method: :post, remote: true %>
-  (<%= answer.favorites.where(design: 'applause').count %>)
+  <span class="pr-2 not_yet_favorited">
+    <%= link_to t('favorite.design.applause').html_safe,  answer_favorites_path(answer, design: 1), method: :post, remote: true, class: "not_yet_favorited" %>
+    <%= answer.favorites.where(design: 'applause').count %>
+  </span>
 
-  <%= link_to t('favorite.design.heart').html_safe,     answer_favorites_path(answer, design: 2), method: :post, remote: true %>
-  (<%= answer.favorites.where(design: 'heart').count %>)
+  <span class="pr-2 not_yet_favorited">
+    <%= link_to t('favorite.design.heart').html_safe,     answer_favorites_path(answer, design: 2), method: :post, remote: true, class: "not_yet_favorited" %>
+    <%= answer.favorites.where(design: 'heart').count %>
+  </span>
 
-  <%= link_to t('favorite.design.realize').html_safe,   answer_favorites_path(answer, design: 3), method: :post, remote: true %>
-  (<%= answer.favorites.where(design: 'realize').count %>)
+  <span class="pr-2 not_yet_favorited">
+    <%= link_to t('favorite.design.realize').html_safe,   answer_favorites_path(answer, design: 3), method: :post, remote: true, class: "not_yet_favorited" %>
+    <%= answer.favorites.where(design: 'realize').count %>
+  </span>
 
-  <%= link_to t('favorite.design.crying').html_safe,    answer_favorites_path(answer, design: 4), method: :post, remote: true %>
-  (<%= answer.favorites.where(design: 'crying').count %>)
+  <span class="pr-2 not_yet_favorited">
+    <%= link_to t('favorite.design.crying').html_safe,    answer_favorites_path(answer, design: 4), method: :post, remote: true, class: "not_yet_favorited" %>
+    <%= answer.favorites.where(design: 'crying').count %>
+  </span>
 
 <% end %>
