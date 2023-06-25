@@ -1,8 +1,5 @@
 <div class="container px-3 px-sm-0">
   <div class="row">
-    
-    <!--エラー文-->
-    <%#= render "layouts/errors", obj: @question %>
 
     <div class="col-md-3">
       <!--ユーザー情報-->
@@ -16,7 +13,7 @@
         <i class="fa-solid fa-tag"></i><%= @tag.name %> の検索結果
       </h3>
       <span>(全<%= @answers.total_count %>件)</span>
-  
+
       <% @answers.each_with_index do |answer, i| %>
         <li class="list-group-item mt-3">
 
@@ -24,12 +21,12 @@
           <div class="h4">
             <%= i + 1 %>.
           </div>
-          
+
           <!--アンサー本文-->
           <div>
             <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
           </div>
-          
+
           <!--アンサーについているタグ-->
           <div>
             <% answer.tags.each do |tag| %>
@@ -55,7 +52,7 @@
             </span>
           <% end %>
           </div>
-          
+
           <!--アンサーのいいねボタン-->
           <div id="answer_<%= answer.id %>" class="my-3">
             <%= render "public/favorites/favorite-btn", answer: answer %>
