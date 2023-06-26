@@ -1,58 +1,75 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>わたくしごと。</span></a>
+
+      <% if admin_signed_in? %>
+        <%= link_to admin_users_path, class: "navbar-brand logo p-2 text-center shadow mx-auto" do %>
+          <div class="text-nowrap h4 mb-0 pl-3 pb-1 logo-top">わたくしごと。</div>
+          <span class="text-nowrap logo-bottom"><small>watakushigoto</small></span>
+        <% end %>
+
+      <% elsif user_signed_in? %>
+        <%= link_to user_path(current_user), class: "navbar-brand logo p-2 text-center shadow mx-auto" do %>
+          <div class="text-nowrap h4 mb-0 pl-3 pb-1 logo-top">わたくしごと。</div>
+          <span class="text-nowrap logo-bottom"><small>watakushigoto</small></span>
+        <% end %>
+
+      <% else %>
+        <%= link_to root_path, class: "navbar-brand logo p-2 text-center shadow mx-auto" do %>
+          <div class="text-nowrap h4 mb-0 pl-3 pb-1 logo-top">わたくしごと。</div>
+          <span class="text-nowrap logo-bottom"><small>watakushigoto</small></span>
+        <% end %>
+      <% end %>
+
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto text-center">
 
 
         <% if admin_signed_in? %>
-          <h4>管理者</h4>
           <li>
-            <%= link_to admin_users_path, class: "nav-link text-light" do %>
+            <%= link_to admin_users_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-house"></i> User
             <% end %>
           </li>
           <li>
-            <%=  link_to admin_questions_path, class: "nav-link text-light" do %>
+            <%=  link_to admin_questions_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-q"></i> Question
             <% end %>
           </li>
           <li>
-            <%=  link_to admin_tags_path, class: "nav-link text-light" do %>
+            <%=  link_to admin_tags_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-tags"></i> Tag
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do %>
+            <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-right-from-bracket"></i> Log out
             <% end %>
           </li>
 
         <% elsif user_signed_in? %>
-          <h4><%= "#{current_user.name}" %></h4>
           <li>
-            <%= link_to user_path(current_user), class: "nav-link text-light" do %>
+            <%= link_to user_path(current_user), class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-house"></i> Home
             <% end %>
           </li>
           <li>
-            <%=  link_to questions_path, class: "nav-link text-light" do %>
+            <%=  link_to questions_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-q"></i> Question
             <% end %>
           </li>
           <li>
-            <%=  link_to tags_path, class: "nav-link text-light" do %>
+            <%=  link_to tags_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-tags"></i> Tag
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-right-from-bracket"></i> Log out
             <% end %>
           </li>
@@ -60,22 +77,22 @@
         <!--ログイン前のナビゲーションバー-->
         <% else %>
           <li>
-            <%= link_to root_path, class: "nav-link text-light" do %>
-              <i class="fa-solid fa-house"></i> Home
+            <%= link_to root_path, class: "nav-link m-2 rounded-pill shadow" do %>
+              <i class="fa-solid fa-house"></i> Top
             <% end %>
           </li>
           <li>
-            <%= link_to about_path, class: "nav-link text-light" do %>
+            <%= link_to about_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-link"></i> About
             <% end %>
           </li>
           <li>
-            <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
+            <%= link_to new_user_registration_path, class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-user-plus"></i> Sign up
             <% end %>
           </li>
           <li>
-            <%= link_to new_user_session_path , class: "nav-link text-light" do %>
+            <%= link_to new_user_session_path , class: "nav-link m-2 rounded-pill shadow" do %>
               <i class="fa-solid fa-right-to-bracket"></i> Log in
             <% end %>
           </li>
@@ -84,13 +101,22 @@
         </ul>
 
         <!--検索フォーム-->
-        <div class="form-group form-inline my-2 float-right">
-          <%= form_with url: search_path, method: :get, local: true do |f| %>
-            <%= f.select :model, options_for_select({"Question" => "question", "Answer" => "answer"}), {},class: "form-control form-control-sm" %>
-            <%= f.text_field :word, placeholder: "検索", class: "form-control form-control-sm" %>
-            <%= f.submit "🔍", class: "btn btn-sm btn-warning search_btn" %>
-          <% end %>
-        </div>
+        <% if user_signed_in? || admin_signed_in? %>
+          <div class="form-group form-inline my-2 float-right ml-auto">
+            <%= form_with url: search_path, method: :get, local: true do |f| %>
+
+                <%= f.select :model, options_for_select({"Question" => "question", "Answer" => "answer"}), {},
+                  class: "form-control form-control-sm mr-sm-2 shadow" %>
+
+                <%= f.text_field :word, placeholder: "検索", class: "form-control form-control-sm mr-sm-2 my-2 shadow" %>
+
+                <%= button_tag type: "submit", class: "btn btn-info btn-sm my-2 my-sm-0 shadow" do %>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                <% end %>
+
+            <% end %>
+          </div>
+        <% end %>
 
       </div>
     </div>

@@ -1,7 +1,5 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <!--エラー文-->
-    <%#= render "layouts/errors", obj: @question %>
 
     <div class="col-md-3">
 
@@ -12,10 +10,10 @@
 
     <div class="col-md-8 offset-md-1">
       <h2 class="row border-bottom pb-3"><%= @user.name %>さんの Favorite </h2>
-      <span>(全<%= @favorited_answers.count %>件)</span>
+      <span>(全<%= @favorited_answers.total_count %>件)</span>
 
       <% if @favorited_answers.present? %>
-      
+
         <ol class="list-group list-group-flush">
           <% @favorited_answers.each_with_index do |answer, i| %>
             <li class="list-group-item mt-3">
@@ -33,7 +31,10 @@
               <!--アンサーについているタグ-->
               <div class="mt-3">
                 <% answer.tags.each do |tag| %>
-                  <%= tag.name %>
+                  <%= link_to admin_answers_path(name: tag.name),
+                    class: "btn btn-sm btn-outline-info rounded-pill" do %>
+                    <i class="fa-solid fa-tag"></i><%= tag.name %>
+                  <% end %>
                 <% end %>
               </div>
 
@@ -46,8 +47,9 @@
 
               <!--アンサーの削除ボタン-->
                 <span class="ml-auto">
-                  <%= link_to "Destroy", admin_question_answer_path(answer.question, answer), method: :delete, remote: false,
-                  data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+                  <%= link_to "Destroy", admin_question_answer_path(answer.question, answer),
+                    method: :delete, remote: false, data: { confirm: "この Answer を削除しますか？" },
+                    class: "btn btn-sm btn-outline-danger" %>
                 </span>
               </div>
 
@@ -57,6 +59,8 @@
             </li>
           <% end %>
         </ol>
+
+        <%= paginate @favorited_answers, theme: "twitter-bootstrap-4" %>
 
       <% else %>
 

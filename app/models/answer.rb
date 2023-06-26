@@ -16,10 +16,6 @@ class Answer < ApplicationRecord
     tags.pluck(:name).join(",")
   end
 
-  # def self.tag_names
-  #   pluck(:name).join(",").split(/[，|,|　| ]/).map(&:to_s)
-  # end
-
   def self.search_for(word)
     Answer.where("opinion LIKE ?", "%" + word + "%")
   end

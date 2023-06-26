@@ -1,9 +1,6 @@
 <div class="container px-3 px-sm-0">
   <div class="row">
 
-    <!--エラー文-->
-    <%#= render "layouts/errors", obj: @question %>
-
     <div class="col-md-3">
       <div class="d-flex flex-column">
 
@@ -23,43 +20,7 @@
     <div class="col-md-8 offset-md-1">
 
       <!--questionの一覧-->
-      <%#= render "index", questions: @questions %>
-      <h2>Questions</h2>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th>タイトル</th>
-            <th></th>
-            <th>アンサー</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @questions.each do |question| %>
-            <tr>
-              <td><%= link_to question.title, admin_question_path(question) %></td>
-              <td><%= question.answers.count %></td>
-
-              <% latest_answer = question.answers.last %>
-
-              <% if latest_answer %>
-                <td><%= truncate(latest_answer.opinion, length: 50) %></td>
-              <% else %>
-                <td>まだアンサーがありません</td>
-              <% end %>
-
-              <td>
-                <%= link_to admin_user_path(question.user.id) do %>
-                  <%= image_tag question.user.get_profile_image(80, 80), class: "rounded-circle" %><br />
-                  <%= question.user.name %>
-                <% end %>
-              </td>
-
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render "index", questions: @questions %>
 
     </div>
 

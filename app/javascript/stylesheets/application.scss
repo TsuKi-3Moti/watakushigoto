@@ -1,1 +1,101 @@
 @use '~bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Josefin+Sans:wght@600&family=Klee+One:wght@600&display=swap');
+
+
+
+  body {
+    font-family: 'Comfortaa','Klee One', cursive;
+    height: 100%;
+    background-image: url("../../assets/images/p0026.jpg");
+    .nav-link {
+      background-color: #fff8e5;
+      border: thin solid;
+      color: #674ea7;
+    }
+  }
+
+  header {
+    background-image: url("../../assets/images/p0129.jpg");
+    background-position: bottom center;
+  }
+
+  footer {
+    background-image: url("../../assets/images/p0147.jpg");
+    color: #fff8e5;
+  }
+
+  .logo {
+    background-color: #fff8e5;
+    border: 4px double;
+    color: #674ea7;
+  }
+
+  .logo-top {
+    border-bottom-style: dashed;
+  }
+
+  .logo-bottom {
+    font-size: 0.75rem;
+  }
+
+  .navbar-toggler {
+    background-color: rgba(103,78,167,0.5);
+    border-color: #fff;
+  }
+
+  .navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+
+  .link-area {
+    background-color: #fff8e5;
+    border: thin solid;
+    color: #674ea7;
+  }
+
+  .not_yet_favorited {
+    color: #7261b1;
+  }
+
+  .tag-index {
+    width: 100%;
+  }
+
+  .pagination {
+    justify-content: center;
+    border-radius: 30%;
+    margin: 10px auto;
+  }
+
+  // ページネーション自体のデザイン
+  .pagination>li>a {
+    border: thin solid;
+    border-color: #674ea7;
+    background: rgba(255,255,255,0.5);
+    color: #674ea7;
+  }
+
+  // 表示しているページ番号のデザイン
+  .pagination>.active>.page-link {
+    background: #674ea7;
+    border-radius: 30%;
+    border-color: #fff;
+  }
+
+  // 表示してないページ番号のデザイン
+  .pagination>.page-item>.page-link {
+    border-radius: 30%;
+    margin: 0 4px;
+  }
+
+  // ホバー時のデザイン
+  .pagination>li>a:hover {
+    background: #dac2e0;
+    border-color: #fff;
+    color: #674ea7;
+  }
+
+  // .guest_sign_in_btn>a:hover {
+  //   text-decoration: none;
+  // }

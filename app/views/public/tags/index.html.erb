@@ -1,7 +1,5 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <!--エラー文-->
-    <%#= render "layouts/errors", obj: @question %>
 
     <div class="col-md-3">
 
@@ -24,6 +22,8 @@
           <% end %>
         </div>
       <% end %>
+
+      <%= paginate @tags, theme: "twitter-bootstrap-4" %>
 
     </div>
 

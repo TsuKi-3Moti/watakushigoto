@@ -4,10 +4,7 @@
 
       <h2>ユーザー情報編集</h2>
 
-      <!--エラー文-->
-      <%#= render "layouts/errors", obj: @user %>
-
-      <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
+      <%= form_with model: @user, url: admin_user_path, method: :patch, local: true  do |f| %>
 
         <div class="form-group">
           <%= f.label :name %>
@@ -35,7 +32,7 @@
 
       <% end %>
 
-      <%= link_to "マイページに戻る", @user %>
+      <%= link_to "マイページに戻る", admin_user_path(@user) %>
 
     </div>
   </div>
