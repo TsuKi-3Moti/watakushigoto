@@ -3,7 +3,7 @@
     <div class="container">
 
       <% if admin_signed_in? %>
-        <%= link_to admin_user_path(current_user), class: "navbar-brand logo p-2 text-center shadow mx-auto" do %>
+        <%= link_to admin_users_path, class: "navbar-brand logo p-2 text-center shadow mx-auto" do %>
           <div class="text-nowrap h4 mb-0 pl-3 pb-1 logo-top">わたくしごと。</div>
           <span class="text-nowrap logo-bottom"><small>watakushigoto</small></span>
         <% end %>

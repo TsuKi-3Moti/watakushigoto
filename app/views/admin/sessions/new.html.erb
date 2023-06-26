@@ -10,8 +10,7 @@
 
       <p class="text-center my-2">こちらは管理者用です</p>
 
-      <%= form_with model: User.new, url: admin_session_path, id: "new_user",
-        class: "new_user", local: true do |f| %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
         <%= render "layouts/error_messages", resource: resource %>
 

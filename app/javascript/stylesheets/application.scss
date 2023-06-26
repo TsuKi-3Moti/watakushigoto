@@ -68,7 +68,7 @@
     margin: 10px auto;
   }
 
-  /*ページネーション自体のデザイン*/
+  // ページネーション自体のデザイン
   .pagination>li>a {
     border: thin solid;
     border-color: #674ea7;
@@ -76,7 +76,7 @@
     color: #674ea7;
   }
 
-  /* 表示しているページ番号のデザイン */
+  // 表示しているページ番号のデザイン
   .pagination>.active>.page-link {
     background: #674ea7;
     border-radius: 30%;
@@ -89,9 +89,13 @@
     margin: 0 4px;
   }
 
-  /*ホバー時のデザイン*/
+  // ホバー時のデザイン
   .pagination>li>a:hover {
     background: #dac2e0;
     border-color: #fff;
     color: #674ea7;
   }
+
+  // .guest_sign_in_btn>a:hover {
+  //   text-decoration: none;
+  // }
