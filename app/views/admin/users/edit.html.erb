@@ -1,1 +1,39 @@
-<h3>users#edit</h3>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+      <h2>ユーザー情報編集</h2>
+
+      <%= form_with model: @user, url: admin_user_path, method: :patch, local: true  do |f| %>
+
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, placeholder: "2文字以上20文字以内", required: true, class: "form-control name" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, required: true, class: "form-control email" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :profile_image %>
+          <%= f.file_field :profile_image, class: "form-control-file profile_image", accept: "image/*" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :introduction %>
+          <%= f.text_area :introduction, placeholder: "50文字まで", rows: "10", class: "form-control introduction" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit class: "btn btn-info" %>
+        </div>
+
+      <% end %>
+
+      <%= link_to "マイページに戻る", admin_user_path(@user) %>
+
+    </div>
+  </div>
+</div>

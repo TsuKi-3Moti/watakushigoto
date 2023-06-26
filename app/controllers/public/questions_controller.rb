@@ -5,9 +5,10 @@ class Public::QuestionsController < ApplicationController
   def create
     @question = current_user.questions.new(question_params)
     if @question.save
-      redirect_to question_path(@question.id)
+      redirect_to question_path(@question.id), notice: "Questionを投稿しました"
     else
       @questions = Question.all
+      flash.now[:alert] = "フォームが空になっています。入力してください"
       render :index
     end
   end
@@ -16,19 +17,19 @@ class Public::QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @new_question = Question.new
     @form = AnswerForm.new(answer: Answer.new(question: @question))
-    @user = @question.user
   end
 
   def index
-    @questions = Question.includes(:answers, :user)
+    @questions = Question.includes(:answers, :user).order(created_at: :desc).page(params[:page])
     @question = Question.new
   end
 
   def update
     @question = Question.find(params[:id])
     if @question.update(question_params)
-      redirect_to question_path(@question.id)
+      redirect_to question_path(@question.id), notice: "Questionを更新しました"
     else
+      flash.now[:alert] = "Questionを更新できませんでした"
       render :edit
     end
   end
@@ -40,7 +41,7 @@ class Public::QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to questions_path
+    redirect_to questions_path, notice: "QuestionとそのAnswerを削除しました"
   end
 
   private

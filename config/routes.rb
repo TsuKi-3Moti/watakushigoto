@@ -5,49 +5,49 @@ Rails.application.routes.draw do
     sessions:      "public/sessions"
   }
 
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
 
+  get "searches/search" => "searches#search", as: "search"
+
+  root to:       "homes#top"
+  get "about" => "homes#about"
+
   scope module: :public do
 
-    root to:       "homes#top"
-    get "about" => "homes#about", as: "about"
+    devise_scope :user do
+      post "users/guest_sign_in", to: "sessions#guest_sign_in"
+    end
 
-    resources :users, only: [:show, :edit, :update] do
-      collection do
-        post "unsubscribe"
-        get  "withdraw"
-        get  "favorites"
-      end
+    resources :users, only: [:show, :index, :edit, :update] do
+      get :favorites, on: :member
     end
 
     resources :questions, only: [:create, :show, :index, :update, :edit, :destroy] do
       resources :answers, only: [:create, :edit, :update, :destroy]
     end
 
-    resources :answers, only: [] do
-      post "favorites/:design" => "favorites#create", as: "favorites"
-      delete "favorites/:design" => "favorites#destroy", as: "favorites_destroy"
-      get "tags" => "relationships#tags", as: "tags", on: :collection
+    resources :answers, only: :index do
+      resources :favorites, only: [:create, :destroy], param: :design, constraints: { code: /\d+/ }
     end
 
-    resources :relationships, only: [:create, :update, :destroy]
-
+    resources :tags, only: :index
   end
 
   namespace :admin do
 
-    root to: "homes#top"
-
-    resources :users, only: [:show, :index, :edit, :update]
-
-    resources :questions, only: [:show, :index, :destroy] do
-      resources :answers, only: [:update, :destroy]
+    resources :users, only: [:show, :index, :edit, :update] do
+      get :favorites, on: :member
     end
 
-    resources :relationships, only: [:index, :update, :destroy]
+    resources :questions, only: [:show, :index, :destroy] do
+      resources :answers, only: :destroy
+    end
 
+    resources :answers, only: :index
+
+    resources :tags, only: [:index, :destroy], param: :name
   end
 
 end

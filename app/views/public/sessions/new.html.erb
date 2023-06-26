@@ -1,26 +1,70 @@
-<h2>Log in</h2>
+<div class="container">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="row justify-content-center p-3">
+
+    <%= link_to users_guest_sign_in_path, method: :post,
+      class: "col-lg-4 col-md-5 col-sm-6 text-center bg-info guest_sign_in_btn rounded-circle mb-3 mx-3" do %>
+      <div class="text-center text-white m-4">
+        <h6><big>ゲストログイン</big><br />
+          Guest Log in<br />
+          <small>お試しでログイン</small>
+        </h6>
+      </div>
+    <% end %>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <div class="row justify-content-center">
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <div class="col-sm-6 text-center mb-4">
+
+      <span class="row">
+        <h3 class="col-lg-7 text-center">新規会員登録</h3>
+        <h4 class="col-lg-5 text-center">Sign up</h4>
+      </span>
+
+      <%= render "public/shared/links" %>
+
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="col-sm-6">
+
+      <div class="row">
+        <h3 class="col-md-6 text-center">ログイン</h3>
+        <h4 class="col-md-6 text-center">Log in</h4>
+      </div>
+
+      <p class="text-center my-2">既にアカウントをお持ちの方</p>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row justify-content-center flex-column p-3">
+
+          <%= render "layouts/error_messages", resource: resource %>
+
+          <div class="field form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",
+            placeholder: "✉️メールアドレス", required: true, class: "form-control" %>
+          </div>
+
+          <div class="field form-group">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+            <p class="d-inline">(<%= @minimum_password_length %> 文字以上)</p>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password",
+            placeholder: "🔒パスワード", required: true, class: "form-control" %>
+          </div>
+
+          <div class="actions form-group">
+            <%= f.submit "ログイン", class: "btn btn-success btn-block" %>
+          </div>
+
+        </div>
+      <% end %>
+
+    </div>
+
   </div>
-<% end %>
 
-<%= render "public/shared/links" %>
+</div>

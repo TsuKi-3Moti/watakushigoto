@@ -16,8 +16,11 @@
     <!-- ヘッダー-->
     <%= render "layouts/header" %>
 
-    <main class="mb-auto mt-4">
-    <%= yield %>
+
+    <main class="mb-auto">
+      <!--フラッシュメッセージ-->
+      <p><%= render "layouts/flash_message" %></p>
+      <%= yield %>
     </main>
 
     <!-- フッター-->
