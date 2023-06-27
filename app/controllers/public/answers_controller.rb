@@ -1,7 +1,10 @@
 class Public::AnswersController < ApplicationController
 
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def create
     @form = AnswerForm.new(answer_params, question: Question.find(params[:question_id]))
+
     if @form.save
       redirect_to request.referer, notice: "Answerを投稿しました"
     else
@@ -26,6 +29,7 @@ class Public::AnswersController < ApplicationController
   def update
     @answer = Answer.find(params[:id])
     @form = AnswerForm.new(answer_params, answer: @answer)
+
     if @form.update
       redirect_to question_path(@answer.question.id), notice: "Answerを更新しました"
     else
@@ -44,6 +48,15 @@ class Public::AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:opinion, :input_tag_name)
+  end
+
+  def is_matching_login_user
+    @form = AnswerForm.new(answer: Answer.find(params[:id]))
+    @answer = @form.answer
+
+    unless @form.question.user == current_user
+      redirect_to questions_path
+    end
   end
 
 end
