@@ -2,15 +2,20 @@
 
   <div class="form-group">
     <%= f.label :opinion, "Answer" %>
-    <p class="d-inline">(20 文字以内)</p>
     <%= f.text_area :opinion, placeholder: "今のアンサーを書いてみましょう！", required: true,
       class: "form-control answer_text_area", rows: "10" %>
   </div>
 
   <div class="form-group">
     <%= f.label :input_tag_name, "Tag" %>
-    <p class="d-inline">　※空白 or カンマでタグが区切られます(大文字・小文字どちらもok!)</p>
-    <%= f.text_field :input_tag_name, placeholder: "タグをつけると他の人が見つけやすくなります！", required: true,
+    <div>
+      <small>
+        ★複数のタグを入力する場合<br />
+        カンマ(,) or 読点(、) or 空白で区切ってください<br />
+        例→タグ1,タグ2、タグ3　タグ4
+      </small>
+    </div>
+    <%= f.text_field :input_tag_name, placeholder: "タグを付けましょう！", required: true,
     class: "form-control answer_text_area" %>
   </div>
 

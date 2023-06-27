@@ -8,7 +8,7 @@ class Public::AnswersController < ApplicationController
     if @form.save
       redirect_to request.referer, notice: "Answerを投稿しました"
     else
-      flash.now[:alert] = "Answerが投稿できませんでした"
+      flash[:alert] = "Answerが投稿できませんでした"
       redirect_to request.referer
     end
   end
@@ -24,12 +24,12 @@ class Public::AnswersController < ApplicationController
 
   def edit
     @form = AnswerForm.new(answer: Answer.find(params[:id]))
+    @answer = @form.answer
   end
 
   def update
-    @answer = Answer.find(params[:id])
     @form = AnswerForm.new(answer_params, answer: @answer)
-
+    @answer = @form.answer
     if @form.update
       redirect_to question_path(@answer.question.id), notice: "Answerを更新しました"
     else

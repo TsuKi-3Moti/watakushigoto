@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h1>Editing question</h1>
+      <h2>Editing Answer</h2>
+      <p>Answerを編集をすることができます。</p>
 
       <%= render "form", form: @form %>
 
-        <%= link_to "Show", questions_path %> |
-        <%= link_to "Back", questions_path %>
+      <%= link_to "戻る", question_path(@answer.question.user) %>
 
     </div>
   </div>
