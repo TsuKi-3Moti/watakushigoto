@@ -1,48 +1,76 @@
-<div class="container px-5 px-sm-0">
+<div class="container px-3 px-sm-0">
   <div class="row">
     <div class="col">
 
     <% if @model == "question" %>
 
-      <h3>"<%= @word %>"を含むクエスチョン検索結果</h3>
+      <h3>
+        "<%= @word %>"を含む
+        <span class="Question">Question</span>
+        検索結果
+      </h3>
       <span>(全<%= @records.total_count %>件)</span>
 
-      <table class="table">
+      <ol class="list-group list-group-flush mb-3">
+        <% @records.each do |question| %>
+          <li class="list-group-item mt-3">
 
-        <thead>
-          <tr>
-            <th>タイトル</th>
-            <th></th>
-            <th>アンサー</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @records.each do |question| %>
-            <tr>
-              <td><%= link_to question.title, question_path(question) %></td>
-              <td><%= question.answers.count %></td>
-
-              <% latest_answer = question.answers.last %>
-
-              <% if latest_answer %>
-                <td><%= truncate(latest_answer.opinion, length: 50) %></td>
+            <!--クエスチョンのタイトル-->
+            <div>
+              <i class="fa-solid fa-q fa-lg Question"></i>
+              <% if admin_signed_in? %>
+                <%= link_to question.title, admin_question_path(question), class: "h5" %>
               <% else %>
-                <td>まだアンサーがありません</td>
+                <%= link_to question.title, question_path(question), class: "h5" %>
               <% end %>
+            </div>
 
-              <td>
-                <%= link_to user_path(question.user.id) do %>
-                  <%= image_tag question.user.get_profile_image(80, 80), class: "rounded-circle" %><br />
-                  <%= question.user.name %>
+            <!--アンサー数-->
+            <div id="<%= question %>_answer_count" class="Answers">
+              Answer数: <%= question.answers.count %>
+            </div>
+
+            <!--アンサー本文-->
+            <div class="mt-3">
+              <i class="fa-solid fa-a fa-lg Answers"></i>
+            </div>
+            <% latest_answer = question.answers.last %>
+            <% if latest_answer %>
+              <div>
+                <%= truncate(latest_answer.opinion, length: 55) %>
+              </div>
+            <% else %>
+              <div>
+                投稿された
+                <span class="Answers">Answer</span>
+                はまだありません。お楽しみに！
+              </div>
+            <% end %>
+
+            <!--クエスチョンのユーザーへのリンク-->
+            <div class="d-flex">
+              <div class="ml-auto">
+                <% if admin_signed_in? %>
+
+                  <%= link_to admin_user_path(question.user) do %>
+                    <%= image_tag question.user.get_profile_image(50,50), class: "rounded-circle" %>
+                    <%= question.user.name %>
+                  <% end %>
+
+                <% else %>
+
+                  <%= link_to user_path(question.user) do %>
+                    <%= image_tag question.user.get_profile_image(50,50), class: "rounded-circle" %>
+                    <%= question.user.name %>
+                  <% end %>
+
                 <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
+              </div>
+            </div>
 
-      </table>
+          </li>
+        <% end %>
+      </ol>
 
       <%= paginate @records, theme: "twitter-bootstrap-4" %>
 
@@ -54,58 +82,108 @@
 
     <% else @model == "answer" %>
 
-      <h3>"<%= @word %>" を含むアンサー検索結果</h3>
+      <h3>
+        "<%= @word %>" を含む
+        <span class="Answers">Answer</span>
+        検索結果
+      </h3>
       <span>(全<%= @records.total_count %>件)</span>
 
-      <% @records.each_with_index do |answer, i| %>
-        <li class="list-group-item mt-3">
+      <ol class="list-group list-group-flush mb-3">
+        <% @records.each do |answer| %>
+          <li class="list-group-item mt-3">
 
-          <!--アンサー番号-->
-          <div class="h4">
-            <%= i + 1 %>.
-          </div>
+            <!--アンサーのユーザーへのリンク-->
+            <% @question = answer.question %>
+            <div>
+              <% if admin_signed_in? %>
 
-          <!--アンサー本文-->
-          <div>
-            <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
-          </div>
+                <%= link_to admin_user_path(@question.user) do %>
+                  <%= image_tag @question.user.get_profile_image(50,50), class: "rounded-circle" %>
+                  <%= @question.user.name %>
+                <% end %>
 
-          <!--アンサーについているタグ-->
-          <div class="my-3">
-            <% answer.tags.each do |tag| %>
-              <%= link_to answers_path(name: tag.name), class: "btn btn-sm btn-outline-info rounded-pill" do %>
-                <i class="fa-solid fa-tag"></i><%= tag.name %>
+              <% else %>
+
+                <%= link_to user_path(@question.user) do %>
+                  <%= image_tag @question.user.get_profile_image(50,50), class: "rounded-circle" %>
+                  <%= @question.user.name %>
+                <% end %>
+
               <% end %>
-            <% end %>
-          </div>
-
-          <div class="d-flex align-items-end">
-            <!--アンサーした日時-->
-            <span class="pr-3">
-              <%= l(answer.updated_at, format: :long) %>
-              <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
-            </span>
-
-            <% if answer.question.user == current_user %>
-              <span class="ml-auto">
-                <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-sm btn-outline-success" %>
-                <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
-                data: { confirm: "このアンサーを削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
-              </span>
-            <% end %>
-          </div>
-
-          <!--アンサーのいいね数-->
-          <% if user_signed_in? %>
-            <div id="answer_<%= answer.id %>" class="my-3">
-              <%= render "public/favorites/favorite-btn", answer: answer %>
             </div>
-          <% else %>
-            <div class="my-3">Favorites : <%= answer.favorites.count %></div>
-          <% end %>
 
-        </li>
-      <% end %>
+            <!--クエスチョンへのリンク-->
+            <div class="mt-3">
+              <i class="fa-solid fa-q fa-lg" style="color: #008dbd;"></i>
+              <% if admin_signed_in? %>
+                <%= link_to @question.title, admin_question_path(@question) %>
+              <% else %>
+                <%= link_to @question.title, question_path(@question) %>
+              <% end %>
+            </div>
+
+            <!--アンサー本文-->
+            <div class="mt-3">
+              <i class="fa-solid fa-a fa-lg" style="color: #E24F93;"></i>
+            </div>
+            <div class="text-break">
+              <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
+            </div>
+
+            <!--アンサーについているタグ-->
+            <div class="my-3">
+              <% answer.tags.each do |tag| %>
+                <% if admin_signed_in? %>
+
+                  <%= link_to admin_answers_path(name: tag.name),
+                    class: "btn btn-sm btn-outline-info rounded-pill" do %>
+                    <i class="fa-solid fa-tag"></i><%= tag.name %>
+                  <% end %>
+
+                <% else %>
+
+                  <%= link_to answers_path(name: tag.name),
+                    class: "btn btn-sm btn-outline-info rounded-pill" do %>
+                  <i class="fa-solid fa-tag"></i><%= tag.name %>
+                  <% end %>
+
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="d-flex align-items-end">
+              <!--アンサーした日時-->
+              <span class="mr-3">
+                <%= l(answer.updated_at, format: :long) %><br />
+                <%= time_ago_in_words(answer.updated_at, format: :distance_in_words)%>前
+              </span>
+
+              <% if answer.question.user == current_user %>
+                <span class="ml-auto">
+                  <%= link_to "Edit", edit_question_answer_path(answer.question, answer), class: "btn btn-sm btn-outline-success" %>
+                  <%= link_to "Destroy", question_answer_path(answer.question, answer), method: :delete, remote: true,
+                  data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+                </span>
+              <% elsif admin_signed_in? %>
+                <span class="ml-auto">
+                  <%= link_to "Destroy", admin_question_answer_path(answer.question, answer), method: :delete, remote: false,
+                    data: { confirm: "この Answer を削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+                </span>
+              <% end %>
+            </div>
+
+            <!--アンサーのいいね数-->
+            <% if admin_signed_in? %>
+              <div class="my-3">Favorites : <%= answer.favorites.count %></div>
+            <% else %>
+              <div id="answer_<%= answer.id %>" class="my-3">
+                <%= render "public/favorites/favorite-btn", answer: answer %>
+              </div>
+            <% end %>
+
+          </li>
+        <% end %>
 
       <%= paginate @records, theme: "twitter-bootstrap-4" %>
 

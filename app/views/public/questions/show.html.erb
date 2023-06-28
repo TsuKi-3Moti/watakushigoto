@@ -1,11 +1,7 @@
-<div class="container px-5 px-sm-0">
+<div class="container px-3 px-sm-0">
   <div class="row">
-    
-    <!--エラー文-->
-    <%#= render "layouts/errors", obj: @question %>
 
-    <div class="col-md-3">
-
+    <div class="col-lg-3 mb-3">
       <!--ユーザー情報-->
       <%= render "public/users/info", user: @question.user %>
 
@@ -14,30 +10,41 @@
 
     </div>
 
-    <div class="col-md-8 offset-md-1">
-  		<h2>Question detail</h2>
+    <div class="col-lg-8 offset-lg-1">
 
-  		<table class="table">
-  		  <tr>
-          <td><%= link_to @question.title, question_path(@question) %></td>
+      <div class="row justify-content-center">
+    		<div class="col-sm-11 col-8 text-center h2">
+    		  <span class="col-5 Question">Question</span>
+    		  <span class="col-1 px-0">&</span>
+    		  <span class="col-5 Answers">Answers</span>
+    		</div>
+  		</div>
 
-          <td id="<%= @question.id %>_answer_count">
-            アンサー数: <%= @question.answers.count %>
-          </td>
+      <ol class="list-group list-group-flush mb-3">
+        <li class="list-group-item mt-3">
+          <!--クエスチョンのタイトル-->
+          <h3>
+            <i class="fa-solid fa-q Question"></i><br />
+            <%= link_to @question.title, question_path(@question), class: "h5" %>
+          </h3>
 
-          <% if @question.user == current_user %>
-            <td>
-              <%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-success" %>
-            </td>
-            
-            <td>
-              <%= link_to "Destroy", question_path(@question), method: :delete,
-                data: { confirm: "” #{@question.title} ”を削除しますか？\n ※このクエスチョンについたアンサーも一緒に削除されます。" },
-                class: "btn btn-sm btn-danger" %>
-            </td>
-          <% end %>
-        </tr>
-      </table>
+          <div class="d-flex align-items-end">
+            <div id="<%= @question.id %>_answer_count">
+              アンサー数: <%= @question.answers.count %>
+            </div>
+
+            <!--クエスチョンの編集と削除ボタン-->
+            <% if @question.user == current_user %>
+              <span class="ml-auto">
+                <%= link_to "Edit", edit_question_path(@question), class: "btn btn-sm btn-success mb-1" %>
+                <%= link_to "Destroy", question_path(@question), method: :delete,
+                  data: { confirm: "” #{@question.title} ”を削除しますか？\n ※このクエスチョンについたアンサーも一緒に削除されます。" },
+                  class: "btn btn-sm btn-danger mb-1" %>
+              </span>
+            <% end %>
+          </div>
+        </li>
+      </ol>
 
       <!--アンサーの一覧-->
       <div class="<%= @question.id %>_answer_index">
@@ -50,6 +57,7 @@
           <%= render "public/answers/form", form: @form %>
         </div>
       <% end %>
+
     </div>
 
   </div>
