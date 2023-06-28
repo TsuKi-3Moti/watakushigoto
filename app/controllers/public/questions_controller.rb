@@ -7,8 +7,8 @@ class Public::QuestionsController < ApplicationController
     if @question.save
       redirect_to question_path(@question.id), notice: "Questionを投稿しました"
     else
-      @questions = Question.all
-      flash.now[:alert] = "フォームが空になっています。入力してください"
+      @questions = Question.includes(:answers, :user).order(created_at: :desc).page(params[:page])
+      flash.now[:alert] = "Questionは30文字以内で入力してください"
       render :index
     end
   end
@@ -52,7 +52,7 @@ class Public::QuestionsController < ApplicationController
 
   def is_matching_login_user
     @question = Question.find(params[:id])
-    unless @question.user.id == current_user.id
+    unless @question.user == current_user
       redirect_to questions_path
     end
   end

@@ -1,42 +1,55 @@
-<h2>Questions</h2>
+<div class="row justify-content-center">
+  <h2 class="Question">
+    Questions
+  </h2>
+</div>
 
-<table class="table">
-  
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th></th>
-      <th>アンサー</th>
-      <th></th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% questions.each do |question| %>
-      <tr>
-        <td><%= link_to question.title, question_path(question) %></td>
-        <td><%= question.answers.count %></td>
+<ol class="list-group list-group-flush mb-3">
+  <% questions.each do |question| %>
+    <li class="list-group-item mt-3">
 
-        <% latest_answer = question.answers.last %>
+      <!--クエスチョンのタイトル-->
+      <div>
+        <i class="fa-solid fa-q fa-lg Question"></i>
+        <%= link_to question.title, question_path(question), class: "h5" %>
+      </div>
 
-        <% if latest_answer %>
-          <td><%= truncate(latest_answer.opinion, length: 50) %></td>
-        <% else %>
-          <td>まだアンサーがありません</td>
-        <% end %>
+      <!--アンサー数-->
+      <div id="<%= question %>_answer_count" class="Answers">
+        Answer数: <%= question.answers.count %>
+      </div>
 
-        <td>
-          <%= link_to user_path(question.user.id) do %>
-            <%= image_tag question.user.get_profile_image(80, 80),
-              class: "rounded-circle" %><br />
+      <!--アンサー本文-->
+      <div class="mt-3">
+        <i class="fa-solid fa-a fa-lg Answers"></i>
+      </div>
+      <% latest_answer = question.answers.last %>
+      <% if latest_answer %>
+        <div>
+          <%= truncate(latest_answer.opinion, length: 55) %>
+        </div>
+      <% else %>
+        <div>
+          投稿された
+          <span class="Answers">Answer</span>
+          はまだありません。お楽しみに！
+        </div>
+      <% end %>
+
+      <!--クエスチョンのユーザーへのリンク-->
+      <div class="d-flex">
+        <div class="ml-auto">
+
+          <%= link_to user_path(question.user) do %>
+            <%= image_tag question.user.get_profile_image(50,50), class: "rounded-circle" %>
             <%= question.user.name %>
           <% end %>
-        </td>
 
-      </tr>
-    <% end %>
+        </div>
+      </div>
 
-  </tbody>
-</table>
+    </li>
+  <% end %>
+</ol>
 
 <%= paginate questions, theme: "twitter-bootstrap-4" %>
