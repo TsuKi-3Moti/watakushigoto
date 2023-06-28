@@ -1,6 +1,6 @@
 @use '~bootstrap/scss/bootstrap';
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Josefin+Sans:wght@600&family=Klee+One:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Klee+One:wght@600&display=swap');
 
 
 
@@ -96,6 +96,10 @@
     color: #674ea7;
   }
 
-  // .guest_sign_in_btn>a:hover {
-  //   text-decoration: none;
-  // }
+  .Question {
+    color: #008dbd;
+  }
+
+  .Answers {
+    color: #E24F93;
+  }

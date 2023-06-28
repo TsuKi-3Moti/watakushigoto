@@ -45,8 +45,8 @@ class AnswerForm
 
   # 戻り値はtagの配列
   def save_tags
-    tag_names = input_tag_name.split(/[,|，|　| ]/)
-    tag_names.map { |name| Tag.find_or_create_by!(name: name) }
+    tag_names = input_tag_name.split(/[,，、\s　]+/)
+    tag_names.map { |name| Tag.find_or_create_by!(name: name) }.uniq
   end
 
   # answerにtagを紐づける

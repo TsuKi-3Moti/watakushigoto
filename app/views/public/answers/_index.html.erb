@@ -1,5 +1,10 @@
 <ol class="list-group list-group-flush mb-3">
-  <h3 class="list-group-item mb-0">Answer</h3>
+  <h3 class="list-group-item mb-0 Answers">
+    <i class="fa-solid fa-a"></i>
+    <% if question.answers.empty? %>
+      <span class="h6"> 投稿されたAnswerはまだありません。お楽しみに！</span>
+    <% end %>
+  </h3>
 
   <% question.answers.each_with_index do |answer, i| %>
     <li class="list-group-item pt-3">
@@ -10,7 +15,7 @@
       </div>
 
       <!--アンサー本文-->
-      <div>
+      <div class="text-break">
         <%= safe_join(answer.opinion.split("\n"),tag(:br)) %>
       </div>
 

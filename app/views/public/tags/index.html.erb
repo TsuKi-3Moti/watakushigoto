@@ -6,6 +6,11 @@
       <!--ユーザー情報-->
       <%= render "public/users/info", user: current_user %>
 
+      <div class="row-11 justify-content-center mt-3">
+        <h2 class="Question text-center">
+          New Question
+        </h2>
+      </div>
       <!--questionの投稿フォーム-->
       <%= render "public/questions/form", question: @question %>
 
