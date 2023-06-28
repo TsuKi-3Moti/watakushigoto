@@ -5,6 +5,11 @@
       <!--ユーザー情報-->
       <%= render "public/users/info", user: @question.user %>
 
+      <div class="row-11 justify-content-center mt-3">
+        <h2 class="Question text-center">
+          New Question
+        </h2>
+      </div>
       <!--questionの新規投稿フォーム-->
       <%= render "form", question: @new_question %>
 

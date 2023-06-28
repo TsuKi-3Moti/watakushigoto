@@ -1,13 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>Editing Answer</h2>
-      <p>Answerを編集をすることができます。</p>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-3 px-sm-0 mx-auto">
+
+      <div class="row justify-content-center text-center">
+        <h2 class="Answers">Editing Answer</h2>
+        <p>Answerの編集ができます。</p>
+      </div>
 
       <%= render "form", form: @form %>
 
-      <%= link_to "戻る", question_path(@answer.question.user) %>
+      <%= link_to "戻る", question_path(@answer.question) %>
 
-    </div>
   </div>
 </div>

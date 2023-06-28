@@ -1,20 +1,22 @@
-<div class="container px-5 px-sm-0">
+<div class="container px-3 px-sm-0">
   <div class="row">
 
-    <!--エラー文-->
-    <%#= render "layouts/errors", obj: @question %>
-
-    <div class="col-md-3">
+    <div class="col-lg-3 mb-3">
 
       <!--ユーザー情報-->
       <%= render "public/users/info", user: current_user %>
 
+      <div class="row-11 justify-content-center mt-3">
+        <h2 class="Question text-center">
+          New Question
+        </h2>
+      </div>
       <!--questionの投稿フォーム-->
       <%= render "form", question: @question %>
 
     </div>
 
-    <div class="col-md-8 offset-md-1">
+    <div class="col-lg-8 offset-lg-1">
 
       <!--questionの一覧-->
       <%= render "index", questions: @questions %>
