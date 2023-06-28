@@ -14,6 +14,7 @@ class Public::AnswersController < ApplicationController
   end
 
   def index
+    @question = Question.new
     if params[:name]
       @tag = Tag.find_by(name: params[:name])
       @answers = @tag.answers.order(created_at: :desc).page(params[:page])
