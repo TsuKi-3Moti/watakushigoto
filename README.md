@@ -41,4 +41,3 @@
 
 ## 使用素材
 - [Font Awesome](https://fontawesome.com/)
-- [ダ鳥獣ギ画](https://chojugiga.com/whats/)
